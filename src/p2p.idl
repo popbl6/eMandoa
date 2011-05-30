@@ -1,0 +1,7 @@
+module utiles{
+	interface FilePart{
+		typedef sequence <octet, 1024> part;
+		long getPart(in long numPart, inout part zatia);
+		long getPartCount();
+	};
+};
