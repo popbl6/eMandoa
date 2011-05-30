@@ -1,0 +1,21 @@
+module erabilgarriak{
+	struct FileData{
+		string name;
+		long long size;
+		string hash;
+	};
+	interface DownloadFile{
+		typedef sequence<octet, 1024> Part;
+		FileData getFileData();
+		long getPartCount();
+		long getPart(in long numPart, inout Part part);
+	};
+	interface Server{
+		typedef sequence<FileData> FileDataArray;
+		typedef sequence<DownloadFile> DownloadFileArray;
+		boolean register(in DownloadFile file);
+		boolean deregister(in DownloadFile file);
+		boolean getLista(inout FileDataArray files);
+		boolean getFile(in FileData data, inout DownloadFileArray files);
+	};
+};
