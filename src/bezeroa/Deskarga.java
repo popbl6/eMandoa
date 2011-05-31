@@ -5,39 +5,65 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import utiles.FilePart;
+import erabilgarriak.DownloadFile;
 
-public class Deskarga {
+public class Deskarga extends Thread {
 	public static final int PART_SIZE = 1024;
+	public static final int JASOTZAILE_MAX = 5;
 	
+	private ArrayList<DownloadFile> seeds;
+	private ArrayList<DownloadFile> seedsErabiltzen;
 	private ArrayList<Integer> parteak;
-	private ArrayList<Integer> deskargatzen;
+	//Array hau igoal ez da beharrezkoa, erroreren bat badago berriro ere parteen array-ra sartuko direlako eta 
+	//programa ixten bada ez da fitxategian gordeta egongo deskargatua izan dela
+	//private ArrayList<Integer> deskargatzen;
+	private ArrayList<Jasotzailea> jasotzaileak;
 	private ArrayBlockingQueue<Part> gordetzeko;
 	private Gordetzailea g;
+	private int partCount = -1;
 	
-	public Deskarga(FilePart fp, File file){
-		g = new Gordetzailea(file);
+	public Deskarga(ArrayList<DownloadFile> seeds) throws Exception{
 		parteak = new ArrayList<Integer>();
-		int part = fp.getPartCount();
-		for(int i=0; i<part; i++){
+		this.seeds = seeds;
+		seedsErabiltzen = new ArrayList<DownloadFile>();
+		//Parteak hartzen sahiatu, errorea ematen badu seed hori deskartatu eta hurrengoa hartu
+		do{
+			if(seeds.size() != 0){//Ez badago seed-ik errore bat bota
+				try{
+					partCount = seeds.get(0).getPartCount();
+				}catch(Exception e){
+					seeds.remove(0);
+				}
+			} else {
+				throw new Exception("Ezin izan da deskarga hasieratu");
+			}
+		}while(partCount == -1);
+		g = new Gordetzailea(new File("./Incoming/"+seeds.get(0).getFileData().name));
+		//Deskargatzeko dauden parteen array-a bete
+		for(int i=0; i<partCount; i++){
 			parteak.add(i);
 		}
-		Collections.shuffle(parteak);
 		gordetzeko = new ArrayBlockingQueue<Part>(100);
+		jasotzaileak = new ArrayList<Jasotzailea>();
+	}
+	
+	public void run(){
 		g.start();
-		//Jasotzaileak hasieratu eta start
-		Jasotzailea[] jasotzaileak = new Jasotzailea[3];
-		for(int i=0; i<3; i++){
-			jasotzaileak[i] = new Jasotzailea(fp, this);
-			jasotzaileak[i].start();
+		//Jasotzaileak hasieratu eta start JASOTZAILE_MAX baino seed gehiago badaude JASOTZAILE_MAX 
+		//jasotzaile bakarrik sortuko dira
+		for(int i=0; i<seeds.size() && i<Deskarga.JASOTZAILE_MAX; i++){
+			Jasotzailea buff = new Jasotzailea(seeds.get(i), this);
+			jasotzaileak.add(buff);
+			seedsErabiltzen.add(seeds.get(i));
+			buff.start();
 		}
-		//Jasotzaileak join
-		for(int i=0; i<3; i++){
+		//Jasotzaileak join (Honetan kontrolatu behar da ea denekin egiten duen join-a edo hasieran daudenekin bakarrik,
+		//iteratzaileak hasierako balioen kopia bat egiten du edo dinamikoa da?)
+		for(Jasotzailea jaso : jasotzaileak){
 			try {
-				jasotzaileak[i].join();
+				jaso.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -119,10 +145,11 @@ public class Deskarga {
 				try {
 					Part part = gordetzeko.take();
 					try {
-						System.out.println("Punteroaren posizioa: "+part.getNumPart()*Deskarga.PART_SIZE);
+						//System.out.println("Punteroaren posizioa: "+part.getNumPart()*Deskarga.PART_SIZE);
 						ra.seek(part.getNumPart()*Deskarga.PART_SIZE);
-						System.out.println("Gordetzen zatia: "+part.getNumPart());
+						//System.out.println("Gordetzen zatia: "+part.getNumPart());
 						ra.write(part.getPart());
+						//Datu fitxategian partea deskargatu dela gorde
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
