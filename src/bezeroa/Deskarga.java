@@ -1,13 +1,19 @@
 package bezeroa;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import erabilgarriak.DownloadFile;
+import erabilgarriak.FileData;
 
 public class Deskarga extends Thread {
 	public static final int PART_SIZE = 1024;
@@ -40,13 +46,13 @@ public class Deskarga extends Thread {
 				throw new Exception("Ezin izan da deskarga hasieratu");
 			}
 		}while(partCount == -1);
-		g = new Gordetzailea(new File("./Incoming/"+seeds.get(0).getFileData().name));
+		g = new Gordetzailea(seeds.get(0).getFileData(), false);
 		//Deskargatzeko dauden parteen array-a bete
 		for(int i=0; i<partCount; i++){
 			parteak.add(i);
 		}
 		gordetzeko = new ArrayBlockingQueue<Part>(100);
-		jasotzaileak = new ArrayList<Jasotzailea>();
+		jasotzaileak = new ArrayList<Jasotzailea>();	
 	}
 	
 	public void run(){
@@ -126,11 +132,25 @@ public class Deskarga extends Thread {
 	private class Gordetzailea extends Thread{
 		private boolean stopped;
 		private RandomAccessFile ra;
+		private BufferedWriter bw;
 		
-		public Gordetzailea(File file){
+		public Gordetzailea(FileData file, boolean isRestart){
 			try {
-				ra = new RandomAccessFile(file, "rw");
+				//Deskargatzeko fitxategia sortu
+				ra = new RandomAccessFile(new File("./incoming/"+file.name), "rw");
+				//Deskargaren progresoa gordetzen duen fitxategia sortu
+				bw = new BufferedWriter(new FileWriter("./incoming"+file.name+".data", isRestart));
+				if(!isRestart){
+					bw.write(file.name);
+					bw.newLine();
+					bw.write(file.size+"");
+					bw.newLine();
+					bw.write(file.hash);
+					bw.newLine();
+				}
 			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
@@ -150,6 +170,8 @@ public class Deskarga extends Thread {
 						//System.out.println("Gordetzen zatia: "+part.getNumPart());
 						ra.write(part.getPart());
 						//Datu fitxategian partea deskargatu dela gorde
+						bw.write(part.getNumPart()+"");
+						bw.newLine();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
