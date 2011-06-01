@@ -3,14 +3,12 @@ package bezeroa;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Semaphore;
 
 import erabilgarriak.DownloadFile;
 import erabilgarriak.FileData;
@@ -29,6 +27,7 @@ public class Deskarga extends Thread {
 	private ArrayBlockingQueue<Part> gordetzeko;
 	private Gordetzailea g;
 	private int partCount = -1;
+	private Semaphore sSeed;
 	
 	public Deskarga(ArrayList<DownloadFile> seeds) throws Exception{
 		parteak = new ArrayList<Integer>();
@@ -52,7 +51,8 @@ public class Deskarga extends Thread {
 			parteak.add(i);
 		}
 		gordetzeko = new ArrayBlockingQueue<Part>(100);
-		jasotzaileak = new ArrayList<Jasotzailea>();	
+		jasotzaileak = new ArrayList<Jasotzailea>();
+		sSeed = new Semaphore(0);
 	}
 	
 	public void run(){
@@ -83,6 +83,8 @@ public class Deskarga extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
+	//Seed-ak errorea ematen dueneko funtzioa, sSeed semaforoan adquire bat ingo dau ez badago seed-ik
 	
 	
 	/**
@@ -182,6 +184,31 @@ public class Deskarga extends Thread {
 			}
 		}
 		
+	}
+	
+	private class SeedChecker extends Thread{
+		private String hash;
+		private boolean stopped;
+		
+		public SeedChecker(FileData file){
+			this.hash = file.hash;
+			stopped = false;
+		}
+		
+		public void interrupt(){
+			stopped = true;
+			super.interrupt();
+		}
+		
+		public void run(){
+			while(!stopped){
+				try {
+					sleep(1*60*1000);
+					//zerbitzariari seed gehiago eskatu
+					//seed-ak bueltatzen baditu eta sSeed semaforoan norbait itxaroten badago release egin seed-ak daudela esateko.
+				} catch (InterruptedException e) {}
+			}
+		}
 	}
 
 }
