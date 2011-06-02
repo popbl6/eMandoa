@@ -28,24 +28,27 @@ public class Deskarga extends Thread {
 	private Gordetzailea g;
 	private int partCount = -1;
 	private Semaphore sSeed;
+	private Semaphore errorEM;
+	private FileData file;
+	private SeedChecker checker;
 	
-	public Deskarga(ArrayList<DownloadFile> seeds) throws Exception{
+	
+	/**
+	 * Ez pasatu seed-ak, file data bat pasatu, run egitean seedCheker klasea martxan jarri eta seed bat egon arte
+	 * itxaroten jarri, horrela deskarga bat berrabiaraztean ere ongi doa
+	 * 
+	 * partCount aldagaia bertan kalkulatu behar da, tamainaren arabera eta ez kanpotik eskatu
+	 * 
+	 * @param seeds
+	 * @throws Exception
+	 */
+	public Deskarga(FileData file) throws Exception{
+		this.file = file;
 		parteak = new ArrayList<Integer>();
-		this.seeds = seeds;
 		seedsErabiltzen = new ArrayList<DownloadFile>();
-		//Parteak hartzen sahiatu, errorea ematen badu seed hori deskartatu eta hurrengoa hartu
-		do{
-			if(seeds.size() != 0){//Ez badago seed-ik errore bat bota
-				try{
-					partCount = seeds.get(0).getPartCount();
-				}catch(Exception e){
-					seeds.remove(0);
-				}
-			} else {
-				throw new Exception("Ezin izan da deskarga hasieratu");
-			}
-		}while(partCount == -1);
-		g = new Gordetzailea(seeds.get(0).getFileData(), false);
+		partCount = (int) Math.ceil(((double)file.size)/PART_SIZE);
+		g = new Gordetzailea(file, false);
+		checker = new SeedChecker(file);
 		//Deskargatzeko dauden parteen array-a bete
 		for(int i=0; i<partCount; i++){
 			parteak.add(i);
@@ -53,18 +56,37 @@ public class Deskarga extends Thread {
 		gordetzeko = new ArrayBlockingQueue<Part>(100);
 		jasotzaileak = new ArrayList<Jasotzailea>();
 		sSeed = new Semaphore(0);
+		errorEM = new Semaphore(1);
+	}
+	
+	public Deskarga(FileData file, ArrayList<Integer> parteak) throws Exception{
+		this.file = file;
+		this.parteak = parteak;
+		seedsErabiltzen = new ArrayList<DownloadFile>();
+		partCount = (int) Math.ceil(((double)file.size)/PART_SIZE);
+		g = new Gordetzailea(file, true);
+		checker = new SeedChecker(file);
+		gordetzeko = new ArrayBlockingQueue<Part>(100);
+		jasotzaileak = new ArrayList<Jasotzailea>();
+		sSeed = new Semaphore(0);
+		errorEM = new Semaphore(1);
 	}
 	
 	public void run(){
 		g.start();
+		checker.start();
+		//seedChecker hasieratu
+		//Ez badago jasotzailerik itxaron
 		//Jasotzaileak hasieratu eta start JASOTZAILE_MAX baino seed gehiago badaude JASOTZAILE_MAX 
 		//jasotzaile bakarrik sortuko dira
 		for(int i=0; i<seeds.size() && i<Deskarga.JASOTZAILE_MAX; i++){
 			Jasotzailea buff = new Jasotzailea(seeds.get(i), this);
 			jasotzaileak.add(buff);
 			seedsErabiltzen.add(seeds.get(i));
-			buff.start();
 		}
+		//Konkurrentzia arazoren bat ekiditzeko erroreren bat ematen badu
+		for(Jasotzailea j : jasotzaileak)
+			j.start();
 		//Jasotzaileak join (Honetan kontrolatu behar da ea denekin egiten duen join-a edo hasieran daudenekin bakarrik,
 		//iteratzaileak hasierako balioen kopia bat egiten du edo dinamikoa da?)
 		for(Jasotzailea jaso : jasotzaileak){
@@ -77,6 +99,7 @@ public class Deskarga extends Thread {
 		//Gordetzailea gelditu
 		//Exekuzioa bukatu behar da
 		g.interrupt();
+		checker.interrupt();
 		try {
 			g.join();
 		} catch (InterruptedException e) {
@@ -131,6 +154,50 @@ public class Deskarga extends Thread {
 		}
 	}
 	
+	/**
+	 * Partea array-an gordetzen du, hurrengo jasotzaile batek berriro ere deskargatzen sahiatzeko
+	 * Seeder-ik ez badago libre sSeed semaforoan itxaroten du zerbait egon arte, bestela jasotzaile
+	 * bat sortzen du libre dagoen batekin eta aurreko jasotzailea bukatu egiten da, 
+	 * TODO hau hobetzeko jasotzaileei seeder-a aldatzeko aukera eman ahal daiteke
+	 * 
+	 * Hari bakar bat egon daiteke seede-etan ibiltzen aldi bakoitzean, bestela arazoak egon daitezke
+	 * TODO seeder-ak bilatzeko funtzioa kanpora atera konkurrentzia pixkat argiago ikusteko?
+	 * 
+	 * 
+	 * @param numPart
+	 */
+	public void error(int numPart){
+		boolean hasita=false;
+		parteak.add(numPart);
+		//TODO hau seederrik libre ez dagoenean erabiltzeko da, seeder bat libre dagoenean jasotzaile berria sortzeko zatia egin behar da
+		//Uste dut hau egina dagoela, konprobatu!!!
+		try {
+			do{
+				if(seeds.size() == 0 || seeds.size() == seedsErabiltzen.size())
+					sSeed.acquire();
+				//Hari bakarra egon daiteke seeder bat bilatzen
+				errorEM.acquire();
+				for(DownloadFile df : seeds){
+					if(!seedsErabiltzen.contains(df)){
+						Jasotzailea buff = new Jasotzailea(df, this);
+						seedsErabiltzen.add(df);
+						//Justo jasotzaile berriak erroreren bat ematen badu ataskatu egingo litzateke, honegatik puntu honetan
+						//beste hari bat sartea segurua da, iada seeder-a erabilia moduan dagoelako
+						hasita = true;
+						errorEM.release();
+						buff.start();
+						jasotzaileak.add(buff);
+					}
+				}
+				//Hasita aldagaia true bada semaforoak release() bat egin duela esan nahi du
+				if(!hasita)
+					errorEM.release();
+			}while(!hasita);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private class Gordetzailea extends Thread{
 		private boolean stopped;
 		private RandomAccessFile ra;
@@ -149,6 +216,7 @@ public class Deskarga extends Thread {
 					bw.newLine();
 					bw.write(file.hash);
 					bw.newLine();
+					bw.write(partCount+"");
 				}
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -187,11 +255,11 @@ public class Deskarga extends Thread {
 	}
 	
 	private class SeedChecker extends Thread{
-		private String hash;
+		private FileData data;
 		private boolean stopped;
 		
 		public SeedChecker(FileData file){
-			this.hash = file.hash;
+			this.data = file;
 			stopped = false;
 		}
 		
@@ -203,9 +271,12 @@ public class Deskarga extends Thread {
 		public void run(){
 			while(!stopped){
 				try {
-					sleep(1*60*1000);
 					//zerbitzariari seed gehiago eskatu
-					//seed-ak bueltatzen baditu eta sSeed semaforoan norbait itxaroten badago release egin seed-ak daudela esateko.
+					//seeder-ak bueltatzen baditu jada seeder arraian ez daudela konprobatu
+					//Gelditzen dire seeder-etan konexioa konprobatu, funtzio bat deitu try-catch baten barruan
+					//Oraindik seeder bat gelditzen bada eta semaforoan norbait itxaroten badago semaforoan release egin
+					//Ez badago inor semaforoan eta jasotzaile kopurua 5 baino txikiagoa bada seeder berriekin jasotzaileak sortu 5 heldu arte
+					sleep(1*60*1000);
 				} catch (InterruptedException e) {}
 			}
 		}

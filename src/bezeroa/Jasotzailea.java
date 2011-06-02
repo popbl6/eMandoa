@@ -16,13 +16,17 @@ public class Jasotzailea extends Thread{
 	}
 	
 	public void run(){
-		int numPart;
-		while((numPart=des.getNextPart()) != -1){
-			PartHolder holder = new PartHolder(new byte[1]);
-			int bytes = df.getPart(numPart, holder);
-			des.putPart(new Part(numPart, Arrays.copyOf(holder.value, bytes)));//Arrays.copy() ez da beharrezkoa, honek array-a 
-																			   //irakurri dituen byte-n arabera mozten du, baina,
-																			   //arrayaren luzeera jada ondo egon beharko zan
+		int numPart=-1;
+		try{
+			while((numPart=des.getNextPart()) != -1){
+				PartHolder holder = new PartHolder(new byte[1]);
+				int bytes = df.getPart(numPart, holder);
+				des.putPart(new Part(numPart, Arrays.copyOf(holder.value, bytes)));//Arrays.copy() ez da beharrezkoa, honek array-a 
+																				   //irakurri dituen byte-n arabera mozten du, baina,
+				   																   //arrayaren luzeera jada ondo egon beharko zan
+		}
+		}catch(Exception e){
+			des.error(numPart);
 		}
 	}
 
