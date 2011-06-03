@@ -1,5 +1,7 @@
 package zerbitzari;
 
+import java.util.ArrayList;
+
 import erabilgarriak.DownloadFile;
 import erabilgarriak.FileData;
 import erabilgarriak.ServerPOA;
@@ -7,28 +9,56 @@ import erabilgarriak.ServerPackage.DownloadFileArrayHolder;
 import erabilgarriak.ServerPackage.FileDataArrayHolder;
 
 public class Zerbitzari extends ServerPOA{
-
-	@Override
+	
+	ArrayList<FitxategiZerrenda> fitxZerrenda;  
+	
+	public Zerbitzari(){
+		fitxZerrenda = new ArrayList<FitxategiZerrenda>();
+		
+	}
+	
 	public boolean deregister(DownloadFile file) {
-		// TODO Auto-generated method stub
+		
+		for(FitxategiZerrenda zer : fitxZerrenda){
+			if(zer.getFitxategi().equals(file.getFileData())){
+				zer.getSeedList().remove(file);
+				return true;
+			}
+		}
 		return false;
 	}
 
-	@Override
 	public boolean getFile(FileData data, DownloadFileArrayHolder files) {
-		// TODO Auto-generated method stub
+
+		for(FitxategiZerrenda zer : fitxZerrenda){
+			if(zer.getFitxategi().equals(data)){
+				files.value= (DownloadFile[]) zer.getSeedList().toArray();
+				return true;
+			}
+		}
 		return false;
 	}
 
-	@Override
+
 	public boolean getLista(FileDataArrayHolder files) {
-		// TODO Auto-generated method stub
-		return false;
+		ArrayList<FileData> fitx=new ArrayList<FileData>();
+		
+		int kop=fitxZerrenda.size();
+		for(int i=0;i<kop;i++){
+			fitx.add(fitxZerrenda.get(i).getFitxategi());
+		}
+		files.value=(FileData[]) fitx.toArray();
+		return true;
 	}
 
-	@Override
+
 	public boolean register(DownloadFile file) {
-		// TODO Auto-generated method stub
+		for(FitxategiZerrenda zer : fitxZerrenda){
+			if(zer.getFitxategi().equals(file.getFileData())){
+				zer.getSeedList().add(file);
+				return true;
+			}
+		}
 		return false;
 	}
 
