@@ -10,33 +10,30 @@ import erabilgarriak.FileData;
 import erabilgarriak.DownloadFilePackage.PartHolder;
 
 public class Bidaltzailea extends DownloadFilePOA{
-	String filename="grafikak.rar";
-	FileData file;
+	FileData data;
+	
+	public Bidaltzailea(FileData data){
+		this.data = data;
+	}
 
 	@Override
 	public int getPartCount() {
-		System.out.println(new File(filename).length()/1024.0);
-		return (int) Math.ceil(new File(filename).length()/1024.0);
+		System.out.println(((double) data.size)/Globalak.eMandoa.PART_SIZE);
+		return (int) Math.ceil(((double) data.size)/Globalak.eMandoa.PART_SIZE);
 	}
 
 	@Override
 	public int getPart(int numPart, PartHolder zatia) {
 		try {
-			File file = new File(filename);
-			//FileInputStream in = new FileInputStream(file);
+			File file = new File(data.name);
 			RandomAccessFile ra = new RandomAccessFile(file, "r");
-			byte[] buff = new byte[1024];
-			long length = file.length()-numPart*1024;
-			length = (length>1024)?1024:length;
+			byte[] buff = new byte[Globalak.eMandoa.PART_SIZE];
+			long length = file.length()-numPart*Globalak.eMandoa.PART_SIZE;
+			length = (length>Globalak.eMandoa.PART_SIZE)?Globalak.eMandoa.PART_SIZE:length;
 			System.out.println("luzeera:" + (int)length);
-			System.out.println("offset: "+numPart*1024);
-			ra.seek(numPart*1024);
+			System.out.println("offset: "+numPart*Globalak.eMandoa.PART_SIZE);
+			ra.seek(numPart*Globalak.eMandoa.PART_SIZE);
 			length = ra.read(buff);
-			/*for(int i=0; i<numPart; i++){
-				in.read(buff);
-			}
-			length = in.read(buff);*/
-			
 			System.out.println("Irakurrita");
 			zatia.value = buff;
 			return (int) length;
@@ -52,7 +49,7 @@ public class Bidaltzailea extends DownloadFilePOA{
 
 	@Override
 	public FileData getFileData() {
-		return file;
+		return data;
 	}
 
 }
