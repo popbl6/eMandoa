@@ -10,6 +10,9 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
 
+import erabilgarriak.Server;
+import erabilgarriak.ServerHelper;
+
 public class Globalak {
 	
 	public static class ORBGlobal {
@@ -77,6 +80,27 @@ public class Globalak {
 			return ORBThread;
 		}
 
+	}
+	
+	public static class eMandoa{
+		private static Server server;
+		//Parte tamaina = 1MB
+		public static final int PART_SIZE=1024*1024;
+		
+		public static Server getServer(){
+			if(server == null){
+				try {
+					server = ServerHelper.narrow(Globalak.ORBGlobal.getNC().resolve_str("server"));
+				} catch (NotFound e) {
+					e.printStackTrace();
+				} catch (CannotProceed e) {
+					e.printStackTrace();
+				} catch (InvalidName e) {
+					e.printStackTrace();
+				}
+			}
+			return server;
+		}
 	}
 
 }
