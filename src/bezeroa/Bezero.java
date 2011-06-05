@@ -63,7 +63,7 @@ public class Bezero {
 	//Deskarga berrabiarazi
 
 
-	public static void partakIrakurri() throws Exception{
+	public static void datakIrakurri() throws Exception{
 		File fichero=new File(INCOMING_PATH);
 		int partKop;
 		ArrayList <Integer> parteak=new ArrayList<Integer>();
