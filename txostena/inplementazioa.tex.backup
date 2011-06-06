@@ -1,0 +1,186 @@
+\section{Inplementazioa}
+\subsection{Informazio sistemak}
+Web aplikazioa, JSP (\textit{JavaServer Pages}) erabilita sortu da, azpitik Java erabiliz. Honen arrazoi nagusia, webgune dinamikoak sortzeko duen erraztasuna, datu-basearekin konektatzeko eginiko funtzioak eta duen integrazio maila altua da.
+
+Txosten honen helburua berau ez denez, labur-labur azalduko da webgunearen egitura: 
+
+Web orrira index.jsp orritik sartzen da, behin logeatuta beste orrietara sartzeko baimena izango duelarik erabiltzaileak: inzidentziak.jsp inzidentziak ikusteko, inzidentziaSortu.jsp inzidentziak sortzeko eta aktiboakIkusi.jsp aktiboak ikusi ahal izateko. Web orriak akzio bat egitean kontrol.jsp-ra doa, honek egin beharreko kalkuluak egin ostean behar den orrira berbideratzen du, aktiboakIkusi.jsp orrian izan ezik, horri honetan comboBox bat egongo da aktibo mota aukeratu ahal izateko, comboBox honen submit-a fitxategia beraren aurka egingo da. Beste bi fitxategi ere badaude  aktiboakTaula.jsp eta inzidentziaTaula.jsp bi orri hauek iframe-en bidez sartuko dira beste web-orrietan, taulak bistaratzeko bakarrik dira.
+
+\subsection{Metodologia}
+\subsubsection{Bertsio kontrola}
+\label{sec:gitinp}
+Aurreko diseinu atalean aztertuz gero zein erraminta erabiliko den eta zergatik, oraingoan Git (Github errepositorio zentral modura) nola konfiguratu eta erabili. IDE batekin sinkronizatu beharrean, zuzeneko metodoa erabili da, komando-lerroa erabiliz. Git instalatu ondoren, gure proiekturako konfiguratu behar da, erabiltzailearen izena eta e-posta helbidea jarriaz:
+
+\begin{verbatim}
+git config --global user.name "popbl6"
+git config --global user.email popbl6@gmail.com
+\end{verbatim}   
+
+Behin konfiguraturik, has gaitezke lanean:
+
+\begin{verbatim}
+mkdir POPBL6                                            (proiektuaren direktorioa 
+                                                        sortu)
+
+cd POPBL6                                               (direktoriora joan)
+
+git init                                                (git errepositorio 
+                                                        hutsa sortu)
+
+touch README                                            (READMEa sortu)
+
+git add README                                          (fitxategia indizera 
+                                                        gehitu)
+
+git commit -m 'lehen commita'                           (aldaketa egin 
+                                                        errepositoriora, 
+                                                        lehen commita mezuarekin)
+
+git remote add origin git@github.com:popbl6/POPBL6.git  (Github-en dagoen 
+                                                        errepositorioa gehitu
+                                                        origin izenarekin)
+
+git push -u origin master                               (gure errepositorio 
+                                                        lokaleko adar nagusia  
+                                                        Github-era pasa)
+\end{verbatim}
+
+Github-eko azken kodea hartzeko, aldiz, nahikoa da gure errepositoriora joan eta hau idaztea:
+
+\begin{verbatim}
+git pull origin
+\end{verbatim}
+
+Automatikoki hartuko du bertako adar nagusia (\textit{master} defektuz). Agindu honek bi ekintza egiten ditu: lehenik eta behin norberaren errepositorioan ez dauden commit-ak (ekarpen kodean) jaitsi (\texttt{fetch} ekintza) eta gero, jaitsitakoa eta errepositorio lokala batu (\texttt{merge} deritzona). Era honetan, sinkronizaturik geratuko dira guk lan egiteko erabiltzen dugun errepositorio lokala eta github-eko zentrala.
+
+\subsection{Segurtasuna}
+Atal honetan, azalduko dena da nola konfiguratu den erabili den Fortigate firewall-a Diseinu atalean planteaturiko soluzioa lortzeko. Dena dela, irakurleak interesa izanez gero, \textit{backup}eko konfigurazio fitxategi osoa aurkitu dezake \ref{sec:forkonf} eranskinean. Era berean, hainbat gauza gehigarri jarri dira (web filtroa e.a.), baina ez denez txosten honetako muina, ez dira jorratuko hemen.
+
+Lehenik eta behin, Firewall-aren interfazeak konfiguratu behar dira (gogoan izan behar da diseinuko atalean azaltzen den \ref{fig:sarea} irudia):
+
+\begin{verbatim}
+System > Network > Interface > dmz
+
+Addressing mode               Manual
+IP/Netmask                    10.10.10.1/255.255.255.0
+Administrative access         PING
+\end{verbatim}
+
+Adibide moduan jarritako DMZko interfazeaz gain, beste biak (barne-sareari eta \texttt{wan1}, internetera konektatuko lukeen interfazeak) antzera konfiguratu behar dira. Behin hiru interfazeak konfiguraturik daudela, beharrezkoa da firewall-eko erregelak kargatzea:
+
+\begin{verbatim}
+Firewall > Policy
+
+Source Interface / Zone           internal
+Source Address                    FinEng
+Destination Interface / Zone      wan1
+Destination Address               All               
+Schedule                          Always
+Service                           ANY
+Action                            ACCEPT
+NAT                               Enable 
+Protection Profile                standard_profile
+\end{verbatim}
+
+Erregela honekin, FinEng taldeari dagozkion helbideetatik (taldearen sorrera ez da jorratzen hemen, baina era berean, sare interno osoari dagokion helbidea jar daiteke bertan), edonora doazen konexioak baimentzen dira, \texttt{standard_profile} profila aplikatzen zaielarik (guk sortua) eta NAT ere aktibatuz.
+
+Era berean aplikatu daiteke DMZn egongo den zerbitzarira konektatzeko:
+
+\begin{verbatim}
+Firewall > Policy
+
+Source Interface / Zone           internal
+Source Address                    FinEng
+Destination Interface / Zone      dmz
+Destination Address               10.10.10.5               
+Schedule                          Always
+Service                           ANY
+Action                            ACCEPT
+NAT                               Enable 
+Protection Profile                standard_profile
+\end{verbatim}
+
+Suposatuz, noski, zerbitzariaren IP helbidea hor agertzen den 10.10.10.5-a delarik. Behin erregela horiek definituta, beharrezkoa da VPNa aktibatzea eta ostean erregela batzuk gehiago definitzea, kanpoko enpresako kideak konektatu ahal izateko gure zerbitzarira. Lehenengo, helbideei izenak emango dizkiegu.
+
+\begin{verbatim}
+Firewall > Address > New
+
+Address name          DMZ sarea
+Type                  Subnet / IP Range
+Subnet / IP Range     10.10.10.0
+Interface             Any
+\end{verbatim}
+
+\begin{verbatim}
+Firewall > Address > New
+
+Address name          Enpresa teknikoa
+Type                  Subnet / IP Range
+Subnet / IP Range     64.230.254.50
+Interface             Any
+\end{verbatim}
+
+Esan behar da, bigarren IP helbidea, simulatzeko asmoarekin esleitu zaiola, \texttt{wan1}-en sare berean egon beharko duelako, baina, benetan beste sare batean egongo litzateke eta beste IP helbide guztiz desberdina litzateke.
+
+Helbideak definiturik izanda, hurrengo pausua, Fortigate-ko aldeko VPNa konfiguratu behar da.
+
+Lehen fasea konfiguratzeko:
+
+\begin{verbatim}
+VPN > IPSEC > Auto Key (IKE) 
+
+Create phase 1
+
+Name                    Enpresa teknikoa
+Remote Gateway          Static IP Address
+IP address              64.230.254.50
+Local interface         wan1
+Mode                    main
+Authentication Method   Preshared Key
+Pre-shared key          pasahitza
+Peer options            edozein
+\end{verbatim}
+
+Bigarren fasea konfiguratzeko:
+
+\begin{verbatim}
+VPN > IPSEC > Auto Key (IKE) 
+
+Create phase 2
+
+Name                  enpresa_tunel_1
+Phase 1               Enpresa teknikoa
+
+> Advanced
+
+Jatorrizko helbidea:  64.230.254.50
+Helbide helburua:     10.10.10.0
+\end{verbatim}
+
+Era honetan, lehen fasearen ostean, sortuko den tunela konfiguratzen da, jatorria beste enpresak duen bezeroan egongo litzatekeelarik eta gure DMZko interfazeko VPN zerbitzaria izango delarik konexioaren helburua. Tunelak eginda, beharrezkoa da, tunel horien arteko trafikoa ahalbidetuko duen firewall erregela berriak.
+
+\begin{verbatim}
+Firewall > Policy
+
+Source Interface / Zone          dmz
+Source Address                   DMZ sarea
+Destination Interface / Zone     wan1
+Destination Address              Enpresa teknikoa
+Schedule                         Always
+Service                          ANY
+Action                           IPSEC
+VPN Tunnel                       enpresa_tunel_1
+Allow Inbound                    yes
+Allow outbound                   yes
+Inbound NAT                      yes
+Outbound NAT                     no
+Protection Profile               standard_profile
+\end{verbatim}
+
+Era honetan, firewall-ak baimenduko du, enpresa teknikoko eta gure DMZn dagoen sarearen arteko VPN trafiko zifratua.
+
+
+
+
+
+ 
