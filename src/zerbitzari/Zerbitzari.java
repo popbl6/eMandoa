@@ -10,16 +10,16 @@ import erabilgarriak.ServerPackage.FileDataArrayHolder;
 
 public class Zerbitzari extends ServerPOA{
 	
-	ArrayList<FitxategiZerrenda> fitxZerrenda;  
+	ArrayList<SeedZerrenda> fitxZerrenda;  
 	
 	public Zerbitzari(){
-		fitxZerrenda = new ArrayList<FitxategiZerrenda>();
+		fitxZerrenda = new ArrayList<SeedZerrenda>();
 		
 	}
 	
 	public boolean deregister(DownloadFile file) {
 		
-		for(FitxategiZerrenda zer : fitxZerrenda){
+		for(SeedZerrenda zer : fitxZerrenda){
 			if(zer.getFitxategi().equals(file.getFileData())){
 				zer.getSeedList().remove(file);
 				return true;
@@ -29,37 +29,57 @@ public class Zerbitzari extends ServerPOA{
 	}
 
 	public boolean getFile(FileData data, DownloadFileArrayHolder files) {
-
-		for(FitxategiZerrenda zer : fitxZerrenda){
-			if(zer.getFitxategi().equals(data)){
-				files.value= (DownloadFile[]) zer.getSeedList().toArray();
-				return true;
+		try{
+			for(SeedZerrenda zer : fitxZerrenda){
+				if(zer.getFitxategi().equals(data)){
+					files.value = new DownloadFile[zer.getSeedList().size()];
+					for(int i=0; i<files.value.length; i++){
+						files.value[i] = zer.getSeedList().get(i);
+					}
+					return true;
+				}
 			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return false;
 	}
 
 
 	public boolean getLista(FileDataArrayHolder files) {
-		ArrayList<FileData> fitx=new ArrayList<FileData>();
+		/*ArrayList<FileData> fitx=new ArrayList<FileData>();
 		
 		int kop=fitxZerrenda.size();
 		for(int i=0;i<kop;i++){
 			fitx.add(fitxZerrenda.get(i).getFitxategi());
 		}
-		files.value=(FileData[]) fitx.toArray();
+		try{
+			files.value=(FileData[]) fitx.toArray();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;*/
+		FileData[] fitx = new FileData[fitxZerrenda.size()];
+		for(int i=0;i<fitxZerrenda.size();i++)
+			fitx[i] = fitxZerrenda.get(i).getFitxategi();
+		files.value = fitx;
 		return true;
 	}
 
 
 	public boolean register(DownloadFile file) {
-		for(FitxategiZerrenda zer : fitxZerrenda){
+		System.out.println("Gehitzen fitxategia: "+file.getFileData().name);
+		for(SeedZerrenda zer : fitxZerrenda){
 			if(zer.getFitxategi().equals(file.getFileData())){
-				zer.getSeedList().add(file);
+				zer.addSeed(file);
 				return true;
 			}
 		}
-		return false;
+		SeedZerrenda buff = new SeedZerrenda(file.getFileData());
+		buff.addSeed(file);
+		fitxZerrenda.add(buff);
+		return true;
 	}
 
 }

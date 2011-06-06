@@ -7,8 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Semaphore;
 
@@ -51,6 +49,7 @@ public class Deskarga extends Thread {
 	public Deskarga(FileData file) throws Exception{
 		this.file = file;
 		parteak = new ArrayList<Integer>();
+		seeds = new ArrayList<DownloadFile>();
 		seedsErabiltzen = new ArrayList<DownloadFile>();
 		partCount = (int) Math.ceil(((double)file.size)/Globalak.eMandoa.PART_SIZE);
 		g = new Gordetzailea(file, false);
@@ -69,6 +68,7 @@ public class Deskarga extends Thread {
 	public Deskarga(FileData file, ArrayList<Integer> parteak) throws Exception{
 		this.file = file;
 		this.parteak = parteak;
+		seeds = new ArrayList<DownloadFile>();
 		seedsErabiltzen = new ArrayList<DownloadFile>();
 		partCount = (int) Math.ceil(((double)file.size)/Globalak.eMandoa.PART_SIZE);
 		downloadedParts = partCount - parteak.size();
@@ -90,6 +90,7 @@ public class Deskarga extends Thread {
 		
 		//Amaitu arte itxaron
 		amaituta.acquireUninterruptibly();
+		checker.interrupt();
 		
 		//Jasotzaileak join (Honetan kontrolatu behar da ea denekin egiten duen join-a edo hasieran daudenekin bakarrik,
 		//iteratzaileak hasierako balioen kopia bat egiten du edo dinamikoa da?)
@@ -103,9 +104,9 @@ public class Deskarga extends Thread {
 		//Gordetzailea gelditu
 		//Exekuzioa bukatu behar da
 		g.interrupt();
-		checker.interrupt();
 		try {
 			g.join();
+			checker.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -179,7 +180,7 @@ public class Deskarga extends Thread {
 				//Deskargatzeko fitxategia sortu
 				ra = new RandomAccessFile(new File("./incoming/"+file.name), "rw");
 				//Deskargaren progresoa gordetzen duen fitxategia sortu
-				bw = new BufferedWriter(new FileWriter("./incoming"+file.name+".data", isRestart));
+				bw = new BufferedWriter(new FileWriter("./incoming/"+file.name+".data", isRestart));
 				if(!isRestart){
 					bw.write(file.name);
 					bw.newLine();
@@ -217,6 +218,7 @@ public class Deskarga extends Thread {
 						if(downloadedParts == partCount){
 							stopped = true;
 							amaituta.release();
+							new File("./incoming/"+file.name+".data").delete();
 						}
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -251,20 +253,32 @@ public class Deskarga extends Thread {
 					//zerbitzariari seed gehiago eskatu
 					DownloadFileArrayHolder files = new DownloadFileArrayHolder(new DownloadFile[1]);
 					if(Globalak.eMandoa.getServer().getFile(data, files)){
-						List<DownloadFile> lista = Arrays.asList(files.value);
+						//List<DownloadFile> lista = Arrays.asList(files.value);
+						ArrayList<DownloadFile> lista = new ArrayList<DownloadFile>();
+						for(DownloadFile df : files.value){
+							lista.add(df);
+						}
+						System.out.println("Seed kopurua: "+files.value.length);
 						//seeder-ak bueltatzen baditu jada seeder arraian ez daudela konprobatu
 						seederEM.acquire();
+						ArrayList<DownloadFile> bufferRemove = new ArrayList<DownloadFile>();
 						for(DownloadFile df : lista){
 							//Seeder-en konexioa konprobatu
-							if(df._non_existent()){
-								lista.remove(df);
-							}
-							else{
-								for(DownloadFile seed : seeds){
-									if(seed._is_equivalent(df))
-										lista.remove(df);
+							try{
+								if(df._non_existent()){
+									bufferRemove.add(df);
+								}else{
+									for(DownloadFile seed : seeds){
+										if(seed._is_equivalent(df))
+											bufferRemove.add(df);
+									}
 								}
+							}catch(Exception e){
+								bufferRemove.add(df);
 							}
+						}
+						for(DownloadFile df : bufferRemove){
+							lista.remove(df);
 						}
 						//listan oraindik elementuren bat badago eta jasotzaile kopurua 5 baino txikiagoa bada jasotzaile berriak sortu
 						for(DownloadFile df : lista){
@@ -273,6 +287,7 @@ public class Deskarga extends Thread {
 								seedsErabiltzen.add(df);
 								seeds.add(df);
 								buff.start();
+								jasotzaileaGehitu();
 								jasotzaileak.add(buff);
 							}
 						}
