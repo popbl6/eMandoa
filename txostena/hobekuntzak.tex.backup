@@ -1,0 +1,10 @@
+\section{Hobekuntzak}
+Hobekuntza posibleen artean nabarmendu daitezke eginiko aplikazioaren alorrean, CMDB-aren diseinu hobea (horrenbeste eremu nulo izango ez lituzkeena) 
+
+Era berean, segurtasunari dagokionez, Firewall-aren diseinu errealistagoa egin daiteke, DMZtan beste zerbitzari batzuk jarriaz eta bertara kanpoko sarbidea baimenduz (web eta posta zerbitzariak, akaso).
+
+Azkenik, erabilitako metodologiarekin, alderik nabarmenena, Github erabiltzerakoan 
+
+-DNS erantzunak, e-posta e.a. baimendu.
+-CMDB-a hobetu
+-Github-en egin bakoitzak bere erabiltzailea

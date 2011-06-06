@@ -1,0 +1,60 @@
+
+\documentclass[a4paper,12pt]{article}
+\usepackage[basque]{babel}%eee
+\usepackage{fullpage}%margina
+\usepackage{graphicx}%irudiak erabili 
+\usepackage{amsmath}%matrizeak erabili, taulak
+\usepackage{listings}%Kode zatiak txertatu
+
+
+\usepackage[pdftex=true,colorlinks=true,linkcolor=blue,citecolor=black,urlcolor=blue]{hyperref}
+\pagestyle{plain}
+
+\makeatletter%Irudien kokapena beti htbp izatea gura dugu
+ \def\fps@figure{htbp}
+\makeatother
+
+\usepackage[font=small,labelfont=bf,textfont=sl,justification=centerlast,labelformat=parens]{caption}
+
+\begin{document}
+
+% Aurkibidea berrizendatu
+\renewcommand{\contentsname}{Aurkibidea}
+% Bibliografia berrizendatu
+\renewcommand{\abstractname}{Laburpena}
+% Irudiak zenbaki arabiarrez
+\renewcommand{\thefigure}{\arabic{figure}}
+
+% irudi guztiak htbp lerrokapena izatea nahi dugu
+\makeatletter
+ \def\fps@figure{htbp}
+\makeatother
+
+\include{azala} % azala
+
+\include{abstract}
+
+\tableofcontents % Aurkibidea
+
+\newpage
+\vspace*{\fill}
+\listoffigures%Irudien zerrenda
+\vspace*{\fill}
+
+\include{sarrera} %sarrera
+
+\include{aanalisia} %arazoaren analisia
+
+\include{diseinua} %soluzioaren diseinua
+
+\include{inplementazioa} %soluzioaren inplementazioa
+
+%\include{ondorioak}%Ondorioak
+
+%\include{hobekuntzak}%Balizko hobekuntzak
+
+\appendix
+\include{eranskinak}
+
+
+\end{document}

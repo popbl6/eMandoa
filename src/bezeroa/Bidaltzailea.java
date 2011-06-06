@@ -25,7 +25,7 @@ public class Bidaltzailea extends DownloadFilePOA{
 	@Override
 	public int getPart(int numPart, PartHolder zatia) {
 		try {
-			File file = new File(data.name);
+			File file = new File("ongoing/"+data.name);
 			RandomAccessFile ra = new RandomAccessFile(file, "r");
 			byte[] buff = new byte[Globalak.eMandoa.PART_SIZE];
 			long length = file.length()-numPart*Globalak.eMandoa.PART_SIZE;

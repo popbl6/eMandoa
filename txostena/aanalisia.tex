@@ -1,0 +1,51 @@
+\section{Arazoaren Analisia}
+
+\subsection{Inzidentzia-aplikazioa}
+\label{sec:ainf}
+Sistema honen muina osatzen duen web bidezko aplikazioan, inzidentziak jasoko dira, ITILeko (\textit{Information Technology Infrastructure Library, Informazio Teknologien Azpiegituraren Liburutegia}) Zerbitzua emateko liburuan aholkatzen diren praktikei jarraiki:
+
+\textbf{Erabiltzaileen logeoa}
+
+Gure sistemak bi erabiltzaile mota izango ditu: informatika departamentuko langileak eta gainontzeko langileak. Edonork web orrian zerbait egin nahi izango badu lehendabizi logeatu egin beharko da. Ondoren langile motaren arabera gauza batzuk egiteko aukera izango dute baina beste batzuk ezingo dituzte egin. Langile guztiek izango dute enpresako aktiboak ikusteko aukera eta inzidentziak zabaltzeko aukera. Bestalde, informatika departamentuko langileek soilik izango dute inzidentziak itxi, inzidentziak ikusi edo inzidentzien taula historikoa ikusteko aukera.
+
+\textbf{Aktiboak ikusi}
+
+Esan bezala enpresako langile guztiek izango dute enpresako aktibo ezberdinak ikusteko aukera. Aktibo hauek taldeka ikusiko dira motaren arabera sailkatuta. Beraz aktiboak ikusi nahi badira zein aktibo mota ikusi nahi den zehaztu beharko da eta hau egin ostean aktiboen taula azalduko da. Era honetan langileak zein aktibotan eragiten duen inzidentziak adierazi ahalko du eta informatikako departamentuko langileak aktibo hori zein beste aktiborekin dagoen erlazionatuta begiratu.
+
+\textbf{Inzidentziak sartu}
+
+Langile guztiek daukate inzidentziak berriak irekitzeko aukera. Inzidentzia bat sortzerakoan zein aktibori eragiten dion adierazi beharko da.Gainera, inzidentzia horren deskribapen bat sartzeko aukera egongo da eta inzidentzia hori zein motatako den ere adierazi beharko da. Horretaz gain, sistemak automatikoki inzidentzia zein langilek eta noiz ireki duen gordeko du.
+
+\textbf{Inzidentziak ikusi}
+
+Informatikako departamentuko langileek izango duten aukeren artean inzidentziak ikusteko aukera izango dute. Honela irekita baina oraindik konpondu gabe dauden inzidentzien informazioa begiratu ahalko da.
+
+\textbf{Inzidentziak itxi}
+
+Informatikako departamentuko langileek inzidentzia bat itxi nahi badute lehendabizi, hau aukeratu beharko dute eta ondoren zein soluzio aplikatu dioten deskribatzeko aukera izango dute horretaz gain, sistemak zein langilek itxi duen inzidentzia ere erregistratuko du eta inzidentzia hau inzidentzien taulatik ezabatu eta taula historikora pasako du.
+
+\textbf{Inzidentzia historikoak ikusi}
+
+Informatika departamentuko langileek iada konponduta dauden inzidentzien informazio ikusteko aukera ere izango dute, hau oso erabilgarri izan daiteke etorkizuneko akatsak zuzentzen lagun diezagukelako.
+
+
+Funtzionalitate guzti hauek definiturik, erabiltzaileek era egokian eman ahalko dituzte inzidentziak, eta IT departamentuko langileek arreta gune zentralizatua izango dute euren egitekoak ikusteko. Aplikazio hau, baina, ezin dute sare lokalean dauden langileek bakarrik erabili, kanpoan dauden langileek ere (bidaian dauden komertzialak e.a.) erabili beharko dute, daukaten arazoen berri emateko. Horrek eramaten gaitu hurrengo atalera.
+
+\subsection{Aplikazioaren segurtasuna}
+\label{sec:asec}
+Esan bezala, aplikazioa ez da egon behar eskuragarri bakarrik enpresako sare lokalean dauden langileentzat, kanpoan egon daitezkeen langileek eta batez ere, zerbitzu teknikoko langileek gure inzidentziak jakinarazteko zerbitzua erabili behar dute. Noski, ziurtatu behar dugu kanpokoen artean, langileek bakarrik erabil dezaketela zerbitzu hau eta gainera, hirugarren pertsona batek ezin izango duela langilearen eta gure zerbitzuaren arteko komunikazioa atzeman.
+
+Hori zirutatzeko bi tresna ezberdin erabiliko dira \textit{firewall} edo su-hesia eta VPN-a (\textit{Virtual Private Network, Sare pribatu birtuala}). Firewall-aren bitartez lortzen dena da trafikoa filtratu, izan ditzakeen jatorri eta helburuaren arabera. Era honetan, kanpotik gure inzidentzia zerbitzura egindako eskaera guztiak galarazi ditzakegu, VPN-a erabiltzen duten erabiltzaileak kenduta. VPN-a nahiz eta kanpoan egon, sare lokalean egongo litzatekeen modura jokatzea ahalbidetzen duen softwarea da, beste sare batzuetan barrena trafikoa eramanez. Gainera, trafiko hori zifratu egiten duenaren abantaila du, hirugarren pertsonengandik trafikoaren edukia ezkutatuz.
+
+\subsection{Metodologia}
+\label{sec:amet}
+Ez da nahikoa aurretik aipaturiko bi garapenak beste gabe egitea, lanerako metodologia propio eta egokia garatzea beharrezkoa da, proiektua bere osotasunean ahalik eta akats gutxien eta errekurtsu erabilera egokiena eginez garatu dela ahal den heinean ziurtatzeko. Baliabide hauek daude definitu ditugu, besteak beste:
+
+\begin{description}
+ \item [Bertsio-kontrolerako sistema] Hainbat pertsona aplikazio bera garatzen egon ahal izateko.
+ \item [Kodifikazio manuala] Kodearen egitura uniformea eta ulerterrazagoa izateko.
+ \item [Berrikuspen sistema] Kodean egon litezkeen akatsak ekiditeko.
+ \item [Frogak] Kodeak funtzionalitateak ahalik eta akats gutxienekin betetzen duela ikusteko
+\end{description}
+
+Baliabide hauetaz gain, baliabideen balorazioa ere txertatuko da dokumentuan, berauen eragina aztertuz eta egin ahalko liratekeen hobekuntza posibleak azalduz. Aparteko dokumentu bat ere garatuko da, aplikazioaren funtzionalitateak eta diseinua zehaztuko dituena, Analisia eta Diseinua izenekoa. \footnote{Dokumentu horren edukiera lan honetan dago bere osotasunean eta ez da eranskinen batean idatzi edukia ez errepikatzeko. Balizko dokumentu horren zati izango liratekeen atalak, hauek dira: \ref{sec:ainf}, \ref{sec:asec}, \ref{sec:dinf} eta \ref{sec:dsec}}. 
