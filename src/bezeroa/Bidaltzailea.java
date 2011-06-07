@@ -36,6 +36,7 @@ public class Bidaltzailea extends DownloadFilePOA{
 			length = ra.read(buff);
 			System.out.println("Irakurrita");
 			zatia.value = buff;
+			ra.close();
 			return (int) length;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

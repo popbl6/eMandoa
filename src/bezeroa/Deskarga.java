@@ -60,7 +60,7 @@ public class Deskarga extends Thread {
 		}
 		gordetzeko = new ArrayBlockingQueue<Part>(100);
 		jasotzaileak = new ArrayList<Jasotzailea>();
-		jasoEM = new Semaphore(0);
+		jasoEM = new Semaphore(1);
 		seederEM = new Semaphore(1);
 		amaituta = new Semaphore(0);
 	}

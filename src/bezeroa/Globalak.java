@@ -85,7 +85,7 @@ public class Globalak {
 	public static class eMandoa{
 		private static Server server;
 		//Parte tamaina = 1MB
-		public static final int PART_SIZE=1024*1024;
+		public static final int PART_SIZE=1024;
 		
 		public static Server getServer(){
 			if(server == null){

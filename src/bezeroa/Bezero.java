@@ -44,6 +44,7 @@ public class Bezero {
 	}
 	
 	public static void main(String args[]) throws ServantNotActive, WrongPolicy{
+		Globalak.ORBGlobal.setArgs(args);
 		fileDatakSortu();
 		FileData filedata=new FileData();
 		Globalak.ORBGlobal.getORBThread().start();
@@ -51,7 +52,6 @@ public class Bezero {
 		    try{
 		    	filedata=files.get(i);
 		    	Bidaltzailea bidal = new Bidaltzailea(filedata);
-		        Globalak.ORBGlobal.setArgs(args);
 		        Globalak.eMandoa.getServer().register(DownloadFileHelper.narrow(Globalak.ORBGlobal.getRootPOA().servant_to_reference(bidal)));
 		    }catch (Exception e){
 		      e.printStackTrace();
