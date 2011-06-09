@@ -1,0 +1,10 @@
+modelado directo del codigo de la aplicacion
+
+proceso de desarrollo/unificado
+
+casos de uso
+modelos conceptuales/más logico de alguien que no ha codificado
+solucion tecnica
+patrones de diseño para 10 decir que son, que modelos hay y si se puede aplicar alguno
+
+aurkezpena + produktua + defentsa denak batera
