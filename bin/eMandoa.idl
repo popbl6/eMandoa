@@ -5,7 +5,7 @@ module erabilgarriak{
 		string hash;
 	};
 	interface DownloadFile{
-		typedef sequence<octet, 1024> Part;
+		typedef sequence<octet, 1048576> Part;
 		FileData getFileData();
 		long getPartCount();
 		long getPart(in long numPart, inout Part part);

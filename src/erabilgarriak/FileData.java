@@ -4,7 +4,7 @@ package erabilgarriak;
  * Generated from IDL struct "FileData".
  *
  * @author JacORB IDL compiler V 2.3.1, 27-May-2009
- * @version generated at 30-may-2011 18:05:40
+ * @version generated at Jun 9, 2011 3:02:02 PM
  */
 
 public final class FileData
@@ -19,10 +19,5 @@ public final class FileData
 		this.name = name;
 		this.size = size;
 		this.hash = hash;
-	}
-	
-	public boolean equals(Object o){
-		FileData file = (FileData) o;
-		return this.name.equals(file.name) && this.size == file.size && this.hash.equals(file.hash);
 	}
 }

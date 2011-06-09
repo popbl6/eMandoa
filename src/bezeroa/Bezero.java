@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class Bezero {
 		File fichero=new File(ONCOMING_PATH);
 		File [] lista;
 		lista=fichero.listFiles();
+		if(lista == null)
+			return;
 		for(int i=0;i<lista.length;i++){
 			if(lista[i].isFile()){
 				FileData fd = new FileData();
@@ -59,6 +62,7 @@ public class Bezero {
 		}
 		Scanner scan = new Scanner(System.in);
 		scan.nextLine();
+		/*
 		FileData[] buff = new FileData[1];
 		buff[0] = new FileData();
 		FileDataArrayHolder holder = new FileDataArrayHolder(buff);
@@ -78,7 +82,14 @@ public class Bezero {
 			System.out.println("Deskarga bukatuta");
 		} catch (Exception e) {
 			e.printStackTrace();
+		}*/
+		try {
+			datakIrakurri();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+		
 		
 		Globalak.ORBGlobal.getORB().shutdown(true);
 		try {
@@ -99,28 +110,31 @@ public class Bezero {
 		int partea;
 		File [] lista;
 		lista=fichero.listFiles(new Filter(".data"));
+		if(lista == null)
+			return;
 		for (int i=0;i<lista.length;i++){
-			FileInputStream data=new FileInputStream(lista[i]);
-		    DataInputStream in = new DataInputStream(data);
-		    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			System.out.println("Fitxategia irakurtzen:"+lista[i]);
+		    BufferedReader br = new BufferedReader(new FileReader(lista[i]));
 		    String name=br.readLine();
-		    Long size=(long)br.read();
+		    Long size=Long.parseLong(br.readLine());
 		    String hash=br.readLine();
 		    FileData fd=new FileData();
 		    fd.name=name;
 		    fd.size=size;
 		    fd.hash=hash;
-		    partKop=(int)br.read();
-		    for(int i1=0; i1<partKop; i1++){
-		    	partea=(int)br.read();
-				parteak.add(partea);
-			}
-		    for(int i1=0;i1<partKop;i1++){
-		    	if(!parteak.contains(i1)){
-		    		faltan.add(i1);
+		    partKop=Integer.parseInt(br.readLine());
+		    String numPart;
+		    while((numPart = br.readLine()) != null)
+		    	parteak.add(Integer.parseInt(numPart));
+		    for(int j=0;j<partKop;j++){
+		    	if(!parteak.contains(j)){
+		    		faltan.add(j);
 		    	}
 		    }
-		    Deskarga berrabiarazi=new Deskarga(fd,faltan);	    
+		    System.out.println("Deskarga berrabiarazten");
+		    Deskarga berrabiarazi=new Deskarga(fd,faltan);
+		    berrabiarazi.start();
+		    berrabiarazi.join();
 		}
 		
 	}

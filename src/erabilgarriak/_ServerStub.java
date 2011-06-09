@@ -5,7 +5,7 @@ package erabilgarriak;
  * Generated from IDL interface "Server".
  *
  * @author JacORB IDL compiler V 2.3.1, 27-May-2009
- * @version generated at 30-may-2011 18:05:40
+ * @version generated at Jun 9, 2011 3:02:02 PM
  */
 
 public class _ServerStub

@@ -78,6 +78,7 @@ public class Deskarga extends Thread {
 		jasotzaileak = new ArrayList<Jasotzailea>();
 		jasoEM = new Semaphore(0);
 		seederEM = new Semaphore(1);
+		amaituta = new Semaphore(0);
 	}
 	
 	private void jasotzaileaGehitu(){jasoEM.acquireUninterruptibly(); jasotzaileAktibo++; jasoEM.release();}
@@ -144,18 +145,19 @@ public class Deskarga extends Thread {
 	public void error(int numPart, DownloadFile df, Jasotzailea jaso){
 		boolean hasita=false;
 		parteak.add(numPart);
-		seeds.remove(df);
-		seedsErabiltzen.remove(df);
-		//Uste dut hau egina dagoela, konprobatu!!!
 		try {
+			seederEM.acquire();
+			seeds.remove(df);
+			seedsErabiltzen.remove(df);
+			//Uste dut hau egina dagoela, konprobatu!!!
 			if(seeds.size() > seedsErabiltzen.size()){
 				//Hari bakarra egon daiteke seeder bat bilatzen
-				seederEM.acquire();
 				for(DownloadFile seed : seeds){
 					if(!seedsErabiltzen.contains(seed)){
 						seedsErabiltzen.add(seed);
 						jaso.setSeeder(seed);
 						hasita = true;
+						break;
 					}
 				}
 				seederEM.release();
@@ -189,6 +191,7 @@ public class Deskarga extends Thread {
 					bw.write(file.hash);
 					bw.newLine();
 					bw.write(partCount+"");
+					bw.flush();
 				}
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -214,10 +217,13 @@ public class Deskarga extends Thread {
 						//Datu fitxategian partea deskargatu dela gorde
 						bw.write(part.getNumPart()+"");
 						bw.newLine();
+						bw.flush();
 						downloadedParts++;
 						if(downloadedParts == partCount){
 							stopped = true;
 							amaituta.release();
+							bw.close();
+							ra.close();
 							new File("./incoming/"+file.name+".data").delete();
 						}
 					} catch (IOException e) {
@@ -289,6 +295,8 @@ public class Deskarga extends Thread {
 								buff.start();
 								jasotzaileaGehitu();
 								jasotzaileak.add(buff);
+							}else{
+								seeds.add(df);
 							}
 						}
 						seederEM.release();

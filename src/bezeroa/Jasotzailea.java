@@ -21,11 +21,15 @@ public class Jasotzailea extends Thread{
 	
 	public void run(){
 		int numPart=-1;
-		while((numPart=des.getNextPart()) != -1 && !hil){
+		while(!hil){
+			if((numPart=des.getNextPart()) == -1)
+				break;
 			try{
 				System.out.println("Jasotzailea "+numPart+" partea hartzen");
 				PartHolder holder = new PartHolder(new byte[1]);
 				int bytes = df.getPart(numPart, holder);
+				if(bytes == 0)
+					throw new Exception();
 				System.out.println("partea jasota");
 				des.putPart(new Part(numPart, Arrays.copyOf(holder.value, bytes)));//Arrays.copy() ez da beharrezkoa, honek array-a 
 																				   //irakurri dituen byte-n arabera mozten du, baina,

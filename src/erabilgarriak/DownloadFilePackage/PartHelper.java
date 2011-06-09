@@ -4,7 +4,7 @@ package erabilgarriak.DownloadFilePackage;
  * Generated from IDL alias "Part".
  *
  * @author JacORB IDL compiler V 2.3.1, 27-May-2009
- * @version generated at 30-may-2011 18:05:40
+ * @version generated at Jun 9, 2011 3:02:02 PM
  */
 
 public final class PartHelper
@@ -26,7 +26,7 @@ public final class PartHelper
 	{
 		if (_type == null)
 		{
-			_type = org.omg.CORBA.ORB.init().create_alias_tc(erabilgarriak.DownloadFilePackage.PartHelper.id(), "Part",org.omg.CORBA.ORB.init().create_sequence_tc(1024, org.omg.CORBA.ORB.init().get_primitive_tc(org.omg.CORBA.TCKind.from_int(10))));
+			_type = org.omg.CORBA.ORB.init().create_alias_tc(erabilgarriak.DownloadFilePackage.PartHelper.id(), "Part",org.omg.CORBA.ORB.init().create_sequence_tc(1048576, org.omg.CORBA.ORB.init().get_primitive_tc(org.omg.CORBA.TCKind.from_int(10))));
 		}
 		return _type;
 	}
@@ -39,7 +39,7 @@ public final class PartHelper
 	{
 		byte[] _result;
 		int _l_result0 = _in.read_long();
-		if (_l_result0 > 1024)
+		if (_l_result0 > 1048576)
 			throw new org.omg.CORBA.MARSHAL("Sequence length incorrect!");
 		try
 		{
@@ -59,7 +59,7 @@ public final class PartHelper
 
 	public static void write (final org.omg.CORBA.portable.OutputStream _out, byte[] _s)
 	{
-				if (_s.length > 1024)
+				if (_s.length > 1048576)
 			throw new org.omg.CORBA.MARSHAL("Incorrect sequence length");
 		_out.write_long(_s.length);
 		_out.write_octet_array(_s,0,_s.length);
