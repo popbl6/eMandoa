@@ -20,4 +20,9 @@ public final class FileData
 		this.size = size;
 		this.hash = hash;
 	}
+	
+	public boolean equals(Object o){
+		FileData fd = (FileData) o;
+		return this.name.equals(fd.name) && this.size == fd.size && this.hash.equals(fd.hash);
+	}
 }

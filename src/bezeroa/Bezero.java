@@ -62,7 +62,7 @@ public class Bezero {
 		}
 		Scanner scan = new Scanner(System.in);
 		scan.nextLine();
-		/*
+		
 		FileData[] buff = new FileData[1];
 		buff[0] = new FileData();
 		FileDataArrayHolder holder = new FileDataArrayHolder(buff);
@@ -82,13 +82,13 @@ public class Bezero {
 			System.out.println("Deskarga bukatuta");
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
-		try {
+		}
+		/*try {
 			datakIrakurri();
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 		
 		
 		Globalak.ORBGlobal.getORB().shutdown(true);

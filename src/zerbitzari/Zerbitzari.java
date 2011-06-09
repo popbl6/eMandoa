@@ -29,6 +29,7 @@ public class Zerbitzari extends ServerPOA{
 	}
 
 	public boolean getFile(FileData data, DownloadFileArrayHolder files) {
+		System.out.println("Fitxategi eskaera: "+data.name);
 		try{
 			for(SeedZerrenda zer : fitxZerrenda){
 				if(zer.getFitxategi().equals(data)){
@@ -36,6 +37,7 @@ public class Zerbitzari extends ServerPOA{
 					for(int i=0; i<files.value.length; i++){
 						files.value[i] = zer.getSeedList().get(i);
 					}
+					System.out.println("Fitxategia bueltatzen "+files.value.length+" seeder");
 					return true;
 				}
 			}
