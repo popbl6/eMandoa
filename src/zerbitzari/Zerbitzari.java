@@ -18,7 +18,7 @@ public class Zerbitzari extends ServerPOA{
 	}
 	
 	public boolean deregister(DownloadFile file) {
-		
+		System.out.println("Fitxategia deregistratzen");
 		for(SeedZerrenda zer : fitxZerrenda){
 			if(zer.getFitxategi().equals(file.getFileData())){
 				zer.getSeedList().remove(file);

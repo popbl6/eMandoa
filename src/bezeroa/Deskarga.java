@@ -122,6 +122,7 @@ public class Deskarga extends Thread {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		System.out.println("deskarga bukatuta");
 	}
 	
 	
@@ -197,11 +198,12 @@ public class Deskarga extends Thread {
 				if(!isRestart){
 					bw.write(file.name);
 					bw.newLine();
-					bw.write(file.size+"");
+					bw.write(String.valueOf(file.size));
 					bw.newLine();
 					bw.write(file.hash);
 					bw.newLine();
-					bw.write(partCount+"");
+					bw.write(String.valueOf(partCount));
+					bw.newLine();
 					bw.flush();
 				}
 			} catch (FileNotFoundException e) {
@@ -230,8 +232,9 @@ public class Deskarga extends Thread {
 						bw.newLine();
 						bw.flush();
 						downloadedParts++;
-						if(pb != null)
+						if(pb != null){
 							pb.setValue(downloadedParts);
+						}
 						if(downloadedParts == partCount){
 							stopped = true;
 							amaituta.release();

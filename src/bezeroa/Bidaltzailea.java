@@ -30,11 +30,11 @@ public class Bidaltzailea extends DownloadFilePOA{
 			byte[] buff = new byte[Globalak.eMandoa.PART_SIZE];
 			long length = file.length()-numPart*Globalak.eMandoa.PART_SIZE;
 			length = (length>Globalak.eMandoa.PART_SIZE)?Globalak.eMandoa.PART_SIZE:length;
-			System.out.println("luzeera:" + (int)length);
-			System.out.println("offset: "+numPart*Globalak.eMandoa.PART_SIZE);
+			//System.out.println("luzeera:" + (int)length);
+			//System.out.println("offset: "+numPart*Globalak.eMandoa.PART_SIZE);
 			ra.seek(numPart*Globalak.eMandoa.PART_SIZE);
 			length = ra.read(buff);
-			System.out.println("Irakurrita");
+			//System.out.println("Irakurrita");
 			zatia.value = buff;
 			ra.close();
 			return (int) length;

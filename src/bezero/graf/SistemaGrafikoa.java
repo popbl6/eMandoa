@@ -1,14 +1,16 @@
 package bezero.graf;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Vector;
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -24,6 +26,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.table.TableRowSorter;
 
+import erabilgarriak.DownloadFile;
 import erabilgarriak.DownloadFileHelper;
 import erabilgarriak.FileData;
 import erabilgarriak.ServerPackage.FileDataArrayHolder;
@@ -37,16 +40,106 @@ import bezeroa.Globalak;
 
 
 public class SistemaGrafikoa extends JFrame implements ActionListener{
-	
+	private static final long serialVersionUID = 1L;
 	JList fitxZerrenda;
 	JTable table;
+	private TableModel tableModel;
+	private ArrayList<DownloadFile> bidaltzaileak=new ArrayList<DownloadFile>();
 	
-	public SistemaGrafikoa(){
+	public SistemaGrafikoa() throws Exception{
+		System.out.println("Kargatzen");
 		this.setSize(800, 500);
+		this.setTitle("eMandoa");
 		this.setResizable(true);
 		this.setLocation(100, 100);
 		this.setContentPane(panelOrokorraSortu());
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		Thread a = new Thread(){
+			public void run(){
+				
+				try {
+					while(true){
+						//table.updateUI();
+						
+						table.setVisible(false);
+						table.setVisible(true);
+						
+						sleep(20);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+				}
+			}
+		};
+		a.start();
+		Bezero.fileDatakSortu();
+		for (int i=0;Bezero.files.size()>i;i++){
+		    try{
+		    	FileData filedata=Bezero.files.get(i);
+		    	Bidaltzailea bidal = new Bidaltzailea(filedata);
+		    	DownloadFile df = DownloadFileHelper.narrow(Globalak.ORBGlobal.getRootPOA().servant_to_reference(bidal));
+		    	bidaltzaileak.add(df);
+		        Globalak.eMandoa.getServer().register(df);
+		    }catch (Exception e){
+		      e.printStackTrace();
+		    }
+		}
+		Bezero.datakIrakurri();
+		for(Deskarga d : Bezero.berrabiarazteko){
+			JProgressBar bar = new JProgressBar();
+			bar.setStringPainted(true);
+			d.setProgressBar(bar);
+			DeskargaData data = new DeskargaData(d.getFileData().name, bar, tamainaKalkulatu(d.getFileData().size));
+			tableModel.add(data);
+			d.start();
+		}
+		this.addWindowListener(new WindowListener(){
+
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				for(DownloadFile df : bidaltzaileak)
+					Globalak.eMandoa.getServer().deregister(df);
+				System.exit(0);
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		fitxZerrenda.setModel(fitxategiZerrendaModeloaSortu());
 		this.setVisible(true);
 	}
 
@@ -61,13 +154,7 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 		JLabel lDeskargak = new JLabel("Deskargak");
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
-		TableModel tableModel = new TableModel();
-		for(Deskarga d : Bezero.berrabiarazteko){
-			JProgressBar bar = new JProgressBar();
-			d.setProgressBar(bar);
-			DeskargaData data = new DeskargaData(d.getFileData().name, bar, tamainaKalkulatu(d.getFileData().size));
-			tableModel.add(data);
-		}
+		tableModel = new TableModel();
 		table = new JTable(tableModel);//TableModel nik egindako klasea da
 		table.setDefaultRenderer(JProgressBar.class, new CellRenderer());//Honek zutabeko klasea JProgress bar motakoa bada 
 																		 //CellRenderer(nik egindakoa) klasea erabiltzekoesaten dio
@@ -102,27 +189,18 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
                 }
             }
         });
-        table.setRowSorter(sorter);
+        //table.setRowSorter(sorter);
+        //table.setVisible(true);
+        
+        //table.setMinimumSize(new Dimension((int)(this.getWidth()*0.5), 350));
 		
 		JScrollPane scrollPane = new JScrollPane(table);
+		
+		scrollPane.setMinimumSize(new Dimension((int)(this.getWidth()*0.5), 350));
 		
 		panel.add(lDeskargak,BorderLayout.NORTH);
 		panel.add(scrollPane, BorderLayout.CENTER);
 		return panel;
-	}
-	
-	
-	//TODO Bukatzerakoan datakSortu funtzioa ezabatu
-	private ArrayList<DeskargaData> datakSortu() {
-		ArrayList<DeskargaData> data = new ArrayList<DeskargaData>();
-		for(int i=0; i<30; i++){
-			DeskargaData buff = new DeskargaData("Deskarga"+i, new JProgressBar(), ((long)((1000*Math.random())*100)/100.0)+"MB");
-			buff.jpb.setMaximum(100);
-			buff.jpb.setValue((int)(100*Math.random()));
-			buff.jpb.setStringPainted(true);
-			data.add(buff);
-		}
-		return data;
 	}
 
 	private Component fitxategiZerrenda() {
@@ -148,38 +226,26 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 		//TODO Zerbitzarian dauden fitxategien zerrenda modeloa sortu eta zerrendari erantzi
 		
 		panel.add(lFitxategi,BorderLayout.NORTH);
-		panel.add(fitxZerrenda, BorderLayout.CENTER);
+		panel.add(new JScrollPane(fitxZerrenda), BorderLayout.CENTER);
 		panel.add(bPanel,BorderLayout.SOUTH);
 		return panel;
 	}
 	
 	public DefaultListModel fitxategiZerrendaModeloaSortu(){
 		FileData[] buff = new FileData[1];
+		buff[0] = new FileData();
 		FileDataArrayHolder holder = new FileDataArrayHolder(buff);
 		Globalak.eMandoa.getServer().getLista(holder);
 		
 		DefaultListModel modelo= new DefaultListModel();
 		for(FileData data : holder.value){
-			modelo.addElement(data.toString());
+			modelo.addElement(data);
 		}
 		return modelo;
 	}
 	
 	
 	public static void main(String[] args) throws Exception{
-		Bezero.fileDatakSortu();
-		for (int i=0;Bezero.files.size()>i;i++){
-		    try{
-		    	FileData filedata=Bezero.files.get(i);
-		    	Bidaltzailea bidal = new Bidaltzailea(filedata);
-		        Globalak.eMandoa.getServer().register(DownloadFileHelper.narrow(Globalak.ORBGlobal.getRootPOA().servant_to_reference(bidal)));
-		    }catch (Exception e){
-		      e.printStackTrace();
-		    }
-		}
-		Bezero.datakIrakurri();
-		
-		
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
@@ -200,12 +266,22 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("deskargatu")){
-			//TODO TableModel.add();
+			Deskarga d;
+			try {
+				d = new Deskarga((FileData) fitxZerrenda.getSelectedValue());
+				JProgressBar bar = new JProgressBar();
+				bar.setStringPainted(true);
+				d.setProgressBar(bar);
+				DeskargaData data = new DeskargaData(d.getFileData().name, bar, tamainaKalkulatu(d.getFileData().size));
+				tableModel.add(data);
+				d.start();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 			
 		}
 		if(e.getActionCommand().equals("aktualizatu")){
 			fitxZerrenda.setModel(fitxategiZerrendaModeloaSortu());
-			
 		}
 		
 	}

@@ -25,6 +25,8 @@ public class Bezero {
 
 	public static void fileDatakSortu(){
 		File fichero=new File(ONCOMING_PATH);
+		if(!fichero.exists())
+			fichero.mkdir();
 		File [] lista;
 		lista=fichero.listFiles();
 		if(lista == null)
@@ -47,7 +49,7 @@ public class Bezero {
 		}
 	}
 	
-	public static void main(String args[]) throws ServantNotActive, WrongPolicy{
+	/*public static void main(String args[]) throws ServantNotActive, WrongPolicy{
 		Globalak.ORBGlobal.setArgs(args);
 		fileDatakSortu();
 		FileData filedata=new FileData();
@@ -84,12 +86,12 @@ public class Bezero {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		/*try {
-			datakIrakurri();
-		} catch (Exception e1) {
+		//try {
+			//datakIrakurri();
+		//} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
+			//e1.printStackTrace();
+		//}
 		
 		
 		Globalak.ORBGlobal.getORB().shutdown(true);
@@ -98,13 +100,15 @@ public class Bezero {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	//Deskarga berrabiarazi
 
 
 	public static void datakIrakurri() throws Exception{
 		File fichero=new File(INCOMING_PATH);
+		if(!fichero.exists())
+			fichero.mkdir();
 		File [] lista;
 		lista=fichero.listFiles(new Filter(".data"));
 		if(lista == null)
