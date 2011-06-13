@@ -83,5 +83,47 @@ public class Zerbitzari extends ServerPOA{
 		fitxZerrenda.add(buff);
 		return true;
 	}
-
+	
+	public class Garbitzailea extends Thread{
+		private boolean stopped=false;
+		
+		public void interrupt(){
+			stopped = true;
+			super.interrupt();
+		}
+		
+		public void run(){
+			while(!stopped){
+				try {
+					sleep(1*60*1000);
+					ArrayList<SeedZerrenda> szKentzeko = new ArrayList<SeedZerrenda>();
+					for(SeedZerrenda sz : fitxZerrenda){
+						ArrayList<DownloadFile> dfKentzeko = new ArrayList<DownloadFile>();
+						//Kentzeko seederrak bilatu eta gorde
+						for(DownloadFile df : sz.getSeedList()){
+							try{
+								if(df._non_existent())
+									dfKentzeko.add(df);
+							}catch(Exception e){
+								dfKentzeko.add(df);
+							}
+						}
+						//Kentzeko daudenak kendu
+						for(DownloadFile df : dfKentzeko){
+							sz.getSeedList().remove(df);
+						}
+						//SeedZerrenda hutzik gelditzen bada kentzeko jarri
+						if(sz.getSeedList().isEmpty()){
+							szKentzeko.add(sz);
+						}
+					}
+					for(SeedZerrenda sz : szKentzeko){
+						fitxZerrenda.remove(sz);
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}	
+	}
 }
