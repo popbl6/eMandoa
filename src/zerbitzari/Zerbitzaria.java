@@ -1,11 +1,11 @@
 package zerbitzari;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
+
+import zerbitzari.Zerbitzari.Garbitzailea;
 
 
 public class Zerbitzaria {
@@ -14,18 +14,20 @@ public class Zerbitzaria {
 	
 	public static void main(String[] args) throws ServantNotActive, WrongPolicy {
 		Globalak.ORBGlobal.setArgs(args);
-		Zerbitzari b = new Zerbitzari();
-		Globalak.ORBGlobal.rebind("server", Globalak.ORBGlobal.getRootPOA().servant_to_reference(b));
+		Zerbitzari zerb = new Zerbitzari();
+		Globalak.ORBGlobal.rebind("server", Globalak.ORBGlobal.getRootPOA().servant_to_reference(zerb));
 		Globalak.ORBGlobal.getORBThread().start();
-		InputStreamReader input = new InputStreamReader(System.in);
-		BufferedReader reader = new BufferedReader(input);
-		String irten;
+		Garbitzailea garb = zerb.new Garbitzailea();
+		garb.start();
+		Scanner in = new Scanner(System.in);
+		System.out.println("Zerbitzaria martxan dagon itzali nahi duzu?(b/e)");
+		in.nextLine();
+		Globalak.ORBGlobal.getORB().shutdown(true);
+		garb.interrupt();
 		try {
-			do{
-				System.out.println("Zerbitzaria martxan dagon itzali nahi duzu?(b/e)");
-				irten=reader.readLine();
-		    }while(irten.equals("e"));
-		} catch (IOException e) {
+			Globalak.ORBGlobal.getORBThread().join();
+			garb.join();
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
