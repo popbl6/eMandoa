@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Semaphore;
 
+import javax.swing.JProgressBar;
+
 import erabilgarriak.DownloadFile;
 import erabilgarriak.FileData;
 import erabilgarriak.ServerPackage.DownloadFileArrayHolder;
@@ -34,6 +36,7 @@ public class Deskarga extends Thread {
 	private FileData file;
 	private SeedChecker checker;
 	private int jasotzaileAktibo = 0;
+	private JProgressBar pb;
 	
 	
 	/**
@@ -79,6 +82,14 @@ public class Deskarga extends Thread {
 		jasoEM = new Semaphore(0);
 		seederEM = new Semaphore(1);
 		amaituta = new Semaphore(0);
+	}
+	
+	public FileData getFileData(){return file;}
+	
+	public void setProgressBar(JProgressBar pb){
+		this.pb = pb;
+		this.pb.setMaximum(partCount);
+		this.pb.setValue(partCount - parteak.size());
 	}
 	
 	private void jasotzaileaGehitu(){jasoEM.acquireUninterruptibly(); jasotzaileAktibo++; jasoEM.release();}
@@ -219,6 +230,8 @@ public class Deskarga extends Thread {
 						bw.newLine();
 						bw.flush();
 						downloadedParts++;
+						if(pb != null)
+							pb.setValue(downloadedParts);
 						if(downloadedParts == partCount){
 							stopped = true;
 							amaituta.release();

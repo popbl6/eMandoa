@@ -25,4 +25,37 @@ public final class FileData
 		FileData fd = (FileData) o;
 		return this.name.equals(fd.name) && this.size == fd.size && this.hash.equals(fd.hash);
 	}
+	
+
+	private String tamainaKalkulatu(long l) {
+	        String unitatea = " B";
+	        Double buff = (double) l;
+	        if(buff < 1024)
+	            return buff+unitatea;
+	        else{
+	            unitatea = " KB";
+	            buff = buff/1024;
+	            if(buff < 1024)
+	                return truncate(buff) + unitatea;
+	            else{
+	                unitatea = " MB";
+	                buff = buff/1024;
+	                if(buff < 1024)
+	                    return truncate(buff) + unitatea;
+	                else{
+	                    unitatea = " GB";
+	                    buff = buff /1024;
+	                    return truncate(buff) + unitatea;
+	                }
+	            }
+	        }
+	    }
+	   
+	    public double truncate(Double d){
+	        return ((long)(d*100))/100.0;
+	    }
+	
+	public String toString(){
+		return name+" ("+tamainaKalkulatu(size)+")";
+	}
 }

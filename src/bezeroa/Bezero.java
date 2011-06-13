@@ -18,7 +18,8 @@ import erabilgarriak.*;
 import erabilgarriak.ServerPackage.FileDataArrayHolder;
 
 public class Bezero {
-	static ArrayList<FileData> files=new ArrayList<FileData>();
+	public static ArrayList<FileData> files=new ArrayList<FileData>();
+	public static ArrayList<Deskarga> berrabiarazteko=new ArrayList<Deskarga>();
 	public static final String ONCOMING_PATH="ongoing";//Konpartitzeko fitxategiak egongo diren helbidea
 	private static final String INCOMING_PATH = "incoming";
 
@@ -104,15 +105,14 @@ public class Bezero {
 
 	public static void datakIrakurri() throws Exception{
 		File fichero=new File(INCOMING_PATH);
-		int partKop;
-		ArrayList <Integer> parteak=new ArrayList<Integer>();
-		ArrayList <Integer> faltan=new ArrayList<Integer>();
-		int partea;
 		File [] lista;
 		lista=fichero.listFiles(new Filter(".data"));
 		if(lista == null)
 			return;
 		for (int i=0;i<lista.length;i++){
+			int partKop;
+			ArrayList <Integer> parteak=new ArrayList<Integer>();
+			ArrayList <Integer> faltan=new ArrayList<Integer>();
 			System.out.println("Fitxategia irakurtzen:"+lista[i]);
 		    BufferedReader br = new BufferedReader(new FileReader(lista[i]));
 		    String name=br.readLine();
@@ -133,8 +133,7 @@ public class Bezero {
 		    }
 		    System.out.println("Deskarga berrabiarazten");
 		    Deskarga berrabiarazi=new Deskarga(fd,faltan);
-		    berrabiarazi.start();
-		    berrabiarazi.join();
+		    berrabiarazteko.add(berrabiarazi);
 		}
 		
 	}
