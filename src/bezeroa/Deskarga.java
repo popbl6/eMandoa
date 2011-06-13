@@ -79,7 +79,7 @@ public class Deskarga extends Thread {
 		checker = new SeedChecker(file, this);
 		gordetzeko = new ArrayBlockingQueue<Part>(100);
 		jasotzaileak = new ArrayList<Jasotzailea>();
-		jasoEM = new Semaphore(0);
+		jasoEM = new Semaphore(1);
 		seederEM = new Semaphore(1);
 		amaituta = new Semaphore(0);
 	}
@@ -317,7 +317,8 @@ public class Deskarga extends Thread {
 						}
 						seederEM.release();
 					}
-					sleep(1*60*1000);
+					if(!stopped)
+						sleep(1*60*1000);
 				} catch (InterruptedException e) {}
 			}
 		}

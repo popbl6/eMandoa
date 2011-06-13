@@ -1,4 +1,4 @@
-package bezero.graf;
+package bezeroa.graf;
 import java.awt.BorderLayout;
 import java.awt.Component;
 

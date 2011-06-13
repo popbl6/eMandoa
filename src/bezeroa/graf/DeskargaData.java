@@ -1,4 +1,4 @@
-package bezero.graf;
+package bezeroa.graf;
 import javax.swing.JProgressBar;
 
 

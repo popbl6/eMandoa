@@ -1,21 +1,18 @@
 package bezeroa;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.omg.PortableServer.POAPackage.ServantNotActive;
-import org.omg.PortableServer.POAPackage.WrongPolicy;
 
 import erabilgarriak.*;
-import erabilgarriak.ServerPackage.FileDataArrayHolder;
 
 public class Bezero {
 	public static ArrayList<FileData> files=new ArrayList<FileData>();
@@ -23,7 +20,7 @@ public class Bezero {
 	public static final String ONCOMING_PATH="ongoing";//Konpartitzeko fitxategiak egongo diren helbidea
 	private static final String INCOMING_PATH = "incoming";
 
-	public static void fileDatakSortu(){
+	public static void fileDatakSortu(JProgressBar pb, JLabel label){
 		File fichero=new File(ONCOMING_PATH);
 		if(!fichero.exists())
 			fichero.mkdir();
@@ -31,9 +28,13 @@ public class Bezero {
 		lista=fichero.listFiles();
 		if(lista == null)
 			return;
+		int pbBase = pb.getValue();
+		Double dPb = 60.0/lista.length;
+		Double addPbBase = 0.0;
 		for(int i=0;i<lista.length;i++){
 			if(lista[i].isFile()){
 				FileData fd = new FileData();
+				label.setText(lista[i].getName()+"...");
 				fd.name=lista[i].getName();
 				fd.size=lista[i].length();
 				try {
@@ -45,6 +46,8 @@ public class Bezero {
 					e.printStackTrace();
 				}
 				files.add(fd);
+				addPbBase += dPb;
+				pb.setValue((int)(pbBase+addPbBase));
 			}
 		}
 	}
@@ -105,7 +108,7 @@ public class Bezero {
 	//Deskarga berrabiarazi
 
 
-	public static void datakIrakurri() throws Exception{
+	public static void datakIrakurri(JProgressBar pb, JLabel label) throws Exception{
 		File fichero=new File(INCOMING_PATH);
 		if(!fichero.exists())
 			fichero.mkdir();
@@ -113,6 +116,9 @@ public class Bezero {
 		lista=fichero.listFiles(new Filter(".data"));
 		if(lista == null)
 			return;
+		int pbBase = pb.getValue();
+		Double dPb = 25.0/lista.length;
+		Double addPbBase = 0.0;
 		for (int i=0;i<lista.length;i++){
 			int partKop;
 			ArrayList <Integer> parteak=new ArrayList<Integer>();
@@ -120,6 +126,7 @@ public class Bezero {
 			System.out.println("Fitxategia irakurtzen:"+lista[i]);
 		    BufferedReader br = new BufferedReader(new FileReader(lista[i]));
 		    String name=br.readLine();
+		    label.setText(name+"...");
 		    Long size=Long.parseLong(br.readLine());
 		    String hash=br.readLine();
 		    FileData fd=new FileData();
@@ -138,6 +145,8 @@ public class Bezero {
 		    System.out.println("Deskarga berrabiarazten");
 		    Deskarga berrabiarazi=new Deskarga(fd,faltan);
 		    berrabiarazteko.add(berrabiarazi);
+		    addPbBase += dPb;
+			pb.setValue((int)(pbBase+addPbBase));
 		}
 		
 	}

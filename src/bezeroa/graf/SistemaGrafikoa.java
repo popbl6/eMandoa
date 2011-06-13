@@ -1,6 +1,7 @@
-package bezero.graf;
+package bezeroa.graf;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -46,12 +47,19 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 	private TableModel tableModel;
 	private ArrayList<DownloadFile> bidaltzaileak=new ArrayList<DownloadFile>();
 	
+	/**
+	 * Hari pare batera atera fitxategiak kargatzeko funtzioak, horrela ez da itxaron behar, join-a kontruktore bukaeran
+	 * 
+	 * @throws Exception
+	 */
 	public SistemaGrafikoa() throws Exception{
+		Splash splash = new Splash();
 		System.out.println("Kargatzen");
 		this.setSize(800, 500);
 		this.setTitle("eMandoa");
 		this.setResizable(true);
 		this.setLocation(100, 100);
+		splash.getProgressBar().setValue(5);
 		this.setContentPane(panelOrokorraSortu());
 		Thread a = new Thread(){
 			public void run(){
@@ -72,7 +80,9 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 			}
 		};
 		a.start();
-		Bezero.fileDatakSortu();
+		splash.getProgressBar().setValue(10);
+		//%60a dago hemen
+		Bezero.fileDatakSortu(splash.getProgressBar(), splash.getLabel());
 		for (int i=0;Bezero.files.size()>i;i++){
 		    try{
 		    	FileData filedata=Bezero.files.get(i);
@@ -84,7 +94,9 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 		      e.printStackTrace();
 		    }
 		}
-		Bezero.datakIrakurri();
+		splash.getProgressBar().setValue(70);
+		//%25a dago hemen
+		Bezero.datakIrakurri(splash.getProgressBar(), splash.getLabel());
 		for(Deskarga d : Bezero.berrabiarazteko){
 			JProgressBar bar = new JProgressBar();
 			bar.setStringPainted(true);
@@ -93,6 +105,7 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 			tableModel.add(data);
 			d.start();
 		}
+		splash.getProgressBar().setValue(95);
 		this.addWindowListener(new WindowListener(){
 
 			@Override
@@ -139,8 +152,11 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 			}
 			
 		});
+		splash.getProgressBar().setValue(100);
 		fitxZerrenda.setModel(fitxategiZerrendaModeloaSortu());
 		this.setVisible(true);
+		splash.setVisible(false);
+		splash.dispose();
 	}
 
 	private Container panelOrokorraSortu() {
@@ -197,6 +213,7 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 		JScrollPane scrollPane = new JScrollPane(table);
 		
 		scrollPane.setMinimumSize(new Dimension((int)(this.getWidth()*0.5), 350));
+		scrollPane.setBackground(Color.white);
 		
 		panel.add(lDeskargak,BorderLayout.NORTH);
 		panel.add(scrollPane, BorderLayout.CENTER);
