@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,11 +19,12 @@ public class Splash extends JWindow{
 	
 	public Splash(){
 		super();
-        JLabel l = new JLabel(new ImageIcon("emulelogo.png"));
+        JLabel l = new JLabel(new ImageIcon("eMandoaLogo.png"));
         pb =  new JProgressBar(0, 100);
         pb.setStringPainted(true);
         label = new JLabel("Hasieratzen...");
-        JPanel panel = new JPanel(new GridLayout(2, 1, 10, 10));
+        JPanel panel = new JPanel(new GridLayout(2, 1));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.add(pb);
         panel.add(label);
         getContentPane().add(l, BorderLayout.CENTER);

@@ -70,7 +70,7 @@ public class Zerbitzari extends ServerPOA{
 	}
 
 
-	public boolean register(DownloadFile file) {
+	public synchronized boolean register(DownloadFile file) {
 		System.out.println("Gehitzen fitxategia: "+file.getFileData().name);
 		for(SeedZerrenda zer : fitxZerrenda){
 			if(zer.getFitxategi().equals(file.getFileData())){
