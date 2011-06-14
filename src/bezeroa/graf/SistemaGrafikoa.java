@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -92,6 +93,9 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 		        Globalak.eMandoa.getServer().register(df);
 		    }catch (Exception e){
 		      e.printStackTrace();
+		      splash.setVisible(false);
+		      JOptionPane.showMessageDialog(null, "Errore bat zerbitzarira konektatzerako orduan", "Errorea", JOptionPane.INFORMATION_MESSAGE);
+		      System.exit(0);
 		    }
 		}
 		splash.getProgressBar().setValue(70);
@@ -122,8 +126,33 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				for(DownloadFile df : bidaltzaileak)
+				for(DownloadFile df : bidaltzaileak){
+					Thread a = new Thread(){
+						boolean stopped=false;
+						public void interrupt(){
+							this.stopped = true;
+							super.interrupt();
+						}
+						public void run(){
+							while(!stopped){
+								try{
+									sleep(1000*2);
+									System.exit(0);
+								}catch(Exception e){}
+							}
+						}
+					};
+					a.start();
 					Globalak.eMandoa.getServer().deregister(df);
+					a.interrupt();
+					try {
+						a.join();
+					} catch (InterruptedException e) {}
+				}
+				Globalak.ORBGlobal.getORB().shutdown(true);
+				try {
+					Globalak.ORBGlobal.getORBThread().join();
+				} catch (InterruptedException e) {}
 				System.exit(0);
 			}
 
@@ -263,7 +292,7 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 	
 	
 	public static void main(String[] args) throws Exception{
-		try {
+		/*try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
 		            UIManager.setLookAndFeel(info.getClassName());
@@ -276,7 +305,10 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 			} catch (Exception e1) {
 			} 
 		}
+		*/
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		new SistemaGrafikoa();
+		Globalak.ORBGlobal.getORBThread().start();
 	}
 
 	
