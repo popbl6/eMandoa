@@ -1,5 +1,11 @@
-\select@language {basque}
-\contentsline {figure}{\numberline {1}{\ignorespaces IT departamentuaren egitura}}{9}{figure.1}
-\contentsline {figure}{\numberline {2}{\ignorespaces Inzidentzien kudeaketa}}{10}{figure.2}
-\contentsline {figure}{\numberline {3}{\ignorespaces CMDB-aren eredu erlazionala}}{11}{figure.3}
-\contentsline {figure}{\numberline {4}{\ignorespaces Sarearen eskema}}{14}{figure.4}
+\select@language {english}
+\contentsline {figure}{\numberline {1}{\ignorespaces User Case diagram of the P2P client}}{5}{figure.1}
+\contentsline {figure}{\numberline {2}{\ignorespaces Connections in the P2P system}}{6}{figure.2}
+\contentsline {figure}{\numberline {3}{\ignorespaces Start of the P2P client}}{8}{figure.3}
+\contentsline {figure}{\numberline {4}{\ignorespaces Run of the \texttt {Deskarga} thread.}}{9}{figure.4}
+\contentsline {figure}{\numberline {5}{\ignorespaces Run of the \texttt {SeedChecker} thread.}}{10}{figure.5}
+\contentsline {figure}{\numberline {6}{\ignorespaces Run of the \texttt {Jasotzailea} thread.}}{11}{figure.6}
+\contentsline {figure}{\numberline {7}{\ignorespaces Run of the \texttt {Gordetzailea} thread.}}{12}{figure.7}
+\contentsline {figure}{\numberline {8}{\ignorespaces \texttt {Bidaltzailea} sending files method.}}{12}{figure.8}
+\contentsline {figure}{\numberline {9}{\ignorespaces Class diagram of the client}}{13}{figure.9}
+\contentsline {figure}{\numberline {10}{\ignorespaces Class diagram of the server}}{14}{figure.10}

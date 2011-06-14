@@ -1,166 +1,92 @@
-\section{Diseinua}
+\section{The product}
 
-\subsection{Informazio sistemak}
+\subsection{Layout}
+% Pantaila argazkiak
 
-\subsubsection{ITIL prozesuak}
-Inzidentziak nola jasoko diren definitu aurretik, beharrezkoa da definitzea enpresak berak nola jokatuko duen inzidentzia bat jasotzerakoan, hortik gero plano praktikora jaitsi eta aplikazioa nola garatuko den pentsatuz. Baina, hori egin baino lehen, nahitaezkoa da IT departamentuaren egitura definitzea, hau da, departamentua nortzuk osatuko duten. Osaketa hori egiteko, 14 pertsona eskuragarri izango ditugula uste da.
-
-Jarraian zerrendaturiko dira IT departamentuak kudeatu beharko lituzkeen zerbitzuak, heziketa arloko enpresa bat dela suposatuz:
-
-\begin{itemize}
- \item Moodle
- \item Webgunea
- \item Web zerbitzuak (idazkaritza birtuala, intranet)
- \item E-posta zerbitzuak
- \item Erabiltzaileen kudeaketa
- \item Baliabideen kontrola (nominak, ERP-a)
- \item Datu-base desberdinen kudeaketa
- \item Sarearen kudeaketa (barne-sarea, interneterako sarbidea)
- \item Ordenagailu pertsonalen kudeaketa (instalazioak e.a.)
- \item Datuen segurtasuna kudeatu
-\end{itemize}
-
-Ikusita zerbitzuak zeintzuk diren, ikusi beharko da, gure bezeroei (enpresako gainerako zatia) eskaintzen diegun zerbitzu hauen arabera, nola egongo den banatuta gure departamentua, zerbitzu hauen garrantziaren eta eskatutako lanaren arabera. Era berean, departamentuaren muina da erabiltzaileen eskariak aztertu eta konpontzea, baita funtzionalitate berriak ahal den heinean txertatzea, enpresaren eguneroko jarduna ahalik eta gutxien oztopatu eta kontrara, berau bultzatzeko.
-
-\ref{fig:egitura} irudian agertzen den moduan banatu dugu gure balizko departamentua:
-
-\begin{figure}
-\centering
-   \includegraphics[scale=0.5]{irudiak/cau.png}
-   % Laster-markak gehitzeko menua
-   \caption{IT departamentuaren egitura}
-   \label{fig:egitura}
-\end{figure}
-
-
-\begin{description}
- \item [Departamentu-burua] (pertsona bat). Izenak dioen moduan, gure IT departamentua eta beraz, Service Desk-aren burua izango litzatekeen pertsona da, formazio tekniko zein kudeaketarakoa duen pertsona litzateke berau, erabaki estrategikoak hartu eta azken hitza esateko ahalmena izateko. Era berean, gure departamentua eta gainerakoen arteko zubia litzateke, enpresako erabakietan informazio teknologien esparruan aholkatuz, edota soluzio berriak eskainiz. Ez luke parte hartuko zerbitzuen kudeaketa zuzenean, baina zerbitzuen araberako baliabideak lortzeko gaitasuna luke eta departamentuaren martxa on edo txarraren arduradun edo erantzule izango litzateke.
-
- \item [Hartzaileak] Bi pertsona. Arduraduna maila administratibo batean enpresarekin dugun lotura den bezala, hartzaileak, egunerokotasunean gertatzen diren gora-beheretzako kontaktuak lirateke. Zubia lirateke, beraz, gora-behera duten pertsonen eta gora-behera hori konpontzeko gai diren pertsonen artean. Arazoa konpontzeko erraza baldin bada edota askotan errepikatutakoa, eurak izango lirateke zuzenean erabiltzaileari eskaera konponduko lioketenak. Beraiek ikusiko lukete ea inzidentzia berriak dauden edo ez.
-
-\item [Moodle eta Web garatzaileak] bi lirateke eta euren lana, Moodle-i funtzionalitate berriak gehitu edota web aplikazioak garatzea/eguneratzea litzateke, esate baterako, enpresako intranet sarean jartzeko.
-
-\item [Garatzaile bat] Honek ere, aurrekoek bezala, aplikazioak garatuko lituzke, baina ez web ingurune baterako, baizik eta datu-base bateko interfazea, kalkuluak egiteko zenbait aplikazio... garatuko lituzke.
-
-\item [Moodle administratzailea] Moodle zerbitzua behar bezala dabilela ziurtatuko duen pertsona da, erabiltzaileak alta eta baja emateaz gain. Bera litzateke arduraduna zerbitzua, gero ezarriko diren baldintzen pean mantentzeko.  
-
-\item [Bi Web eta posta administratzaile] Hauek, webguneak, garaturiko web aplikazioak eta posta zerbitzua mantenduko luketen pertsonak dira, erabiltzaileentzat ahalik eta eskuragarrien jarriaz.
-
-\item [Bi Sistema eta sare administratzaile] Sistema (zerbitzariak, erabiltzaileen ekipoak...) eta sarea kudeatuko luketen pertsonak dira.
-
-\item [Hiru datu-base eta ERP administratzaile] Horietatik bi arduratuko lirateke ERPa kudeatzeaz eta bestea datu-baseko administratzaile modura. ERPko administratzaileetariko bat, datu-baseko administratzaile ere izan daiteke, besteari lagundu eta zerbitzu hobe bat eman ahal izateko.
-\end{description}
-
-Behin departamentua osaturik, bi hartzaile eta hainbat adituk osatuko luketela ikusirik, inzidentzia baten aurrean nola jokatuko litzatekeen definitu behar da, ITIL liburuetan azaltzen den modura. Gurean, \ref{fig:inzidentzia}. irudian ikus daiteke nola jokatuko den inzidentzia baten aurrean. Bertan,\textit{Arazoen kudeaketa} izeneko hitzak agertzen dira, baina hori askoz ere hedadura handiagoa duen gaia da eta lan honetako zioa baino askoz harago doa. Lan honetan suposatuko da, inzidentzia guztiak atoan konpondu edo bestela workaround (momentuko konponketa), zerbitzuaren aldaketa sakonak beste era batera landu beharreko gaia litzateke.
+\subsection{Working process}
+In this section, the main functionalities of the program are explained, one layer deeper that has been shown in the Methodology section. Here, in-depth schemas are in place, using mainly Sequential UML diagrams. It has to be mentioned, though, that the text in those diagrams are in Basque language, the same language the codification of the program has been made. That way it will be simpler to compare the diagrams with the code rather than translating function and object names into English just for the diagrams. But, on the contrary, all the explanations of the diagrams are done in English. Also, the bulk of the diagrams focuses on the client, because it is the part where the real work is done. As said, servers just put clients together. Not all the code is featured in the diagrams (graphical interfaces etc. have been left apart), and just the distributed nature of the application is shown.
 
 \begin{figure}
    \centering
-   \includegraphics[scale=0.4]{irudiak/gestionInzidentzia.png}
+   \includegraphics[scale=0.6]{irudiak/bezeroahasiera.png}
    % Laster-markak gehitzeko menua
-   \caption{Inzidentzien kudeaketa}
-   \label{fig:inzidentzia}
-\end{figure}
+   \caption{Start of the P2P client}
+   \label{fig:hasiera}
+\end{figure} 
 
-\subsubsection{CMDB}
-Behin enpresan nola jokatuko den definiturik dagoela, behar-beharrezkoa da dokumentaturik izatea zeintzuk diren inzidentziekin loturik egongo diren elementuak, hau da, enpresako IT aktiboak. Beharrezkoa da ondo gordeta izatea aktibo bakoitza zer den, zein atributu dituen eta zein den aktibo horren jabe edo arduradua. Horretarako tresna, CMDB-a da.
-
-CMDB (\textit{Configuration management database, Konfigurazioaren kudeaketarako datu-basea}) delakoa da inzidentziak gordetzeko web aplikazioaren muina. Bertan daude gordeta, IT teknologiekin loturiko enpresako aktibo guztiak (CI edo konfigurazio item-ak deritzena). \ref{fig:cmdb}. irudian ikus daiteke zein den CMDB-aren egitura. Aktibo gehienak taula berean daude jarrita, kodeak esleitzerako orduan erraztasuna izateko. Era berean, asmo horrekin garaturiko funtzioen bitartez sartuko dira datuak datu-basean, erabiltzailearentzat taulako NULL balio guztiak guztiz gardenak izango direlarik.
+In the figure no. \ref{fig:hasiera} it is possible to see what the client does when it is started.  First, extracts the identification data of the file (file name, hash), after creates  the \texttt{Bidaltzailea} object, whose responsibility is to upload the content the user is sharing. Finally, it creates a Corba object with it and registers it in the Server. This process is repeated with all the files in the \texttt{ongoing} directory. 
 
 \begin{figure}
-\centering
-   \includegraphics[scale=0.4]{irudiak/cmdb.png}
+   \centering
+   \includegraphics[scale=0.6]{irudiak/deskargenruna.png}
    % Laster-markak gehitzeko menua
-   \caption{CMDB-aren eredu erlazionala}
-   \label{fig:cmdb}
-\end{figure}
+   \caption{Run of the \texttt{Deskarga} thread.}
+   \label{fig:deskarga}
+\end{figure} 
 
-\ref{fig:cmdb}. irudian ikus daitekeenez, inzidentziak gordetzerako orduan, inzidentzia kodea, inzidentzia zabaldu duen langilearen kodea, inzidentzia itxi duen langilearen kodea, inzidentzia hasi zen momentua, bukatutako momentua, inzidentziaren deskribapen laburra, konponketaren inzidentzia laburra, inplikaturiko konfigurazio itemaren kodea eta, azkenik, zein inzidentzia mota litzatekeen, motak, beste taula batean egongo lirateke, kategorizatuta. Era honetan, inzidentziaren inguruko datu guztiak gorde ahal izango lirateke, bertan.
-
-\subsubsection{Inzidentzien web aplikazioa}
-\label{sec:webapdis}
-Erabiltzaileak web orrira sartzean izena eta pasahitza sartu beharko dute (datubasean hash baten bitartez egongo direlarik gordeta), gure enpresan lana egiten dutela ziurtatzeko. Behin sisteman logeatuta, inzidentziak sortzeko aukera, edo enpresako CI(configuration item) ezberdinak ikusteko aukera izango dute. Inzidentzia bat zabaltzerako orduan, langileek beraien kodea eta intzidentzia infektatzen dion itemaren kodea sartu beharko du, deskribapen batekin eta intzidentzia mota bat aukeratuz. 
-
-IT departamentuko langileak badira ordea, honetaz gain jendeak zabalduriko intzidentziak ikusteko edota ixteko gaitasuna ere izango dute. Inzidentzia bat ixtean intzidentzia hori konpontzeko bete behar izan diren pausuak idatzi beharko ditu langileak, dokumentazio eta erreferentzia modura gordeta izateko.
-
-\subsection{Metodologia}
-\subsubsection{Kodifikazio manuala}
-\ref{sec:webapdis} atalean azaldu den aplikazioa garatzen hasi baino lehen, beharrezkoa da jakitea aplikazioa \textit{nola} garatuko den. Ez funtzionalitate aldetik, horiek jada definiturik baitaude, baizik eta kode aldetik nola egongo den eginda. Era honetan lortzen dena da, kodearen estiloan uniformetasun bat bermatzea, egingo diren berrikuspenak erraztu (programatzaile bakoitzaren programazio-estiloak inpaktu txikiagoa izango baitu eta komentatuta egongo baita), bertsio berriak egitea errazteko (kodifikazio manualak, kodea berriztagarria izateko irizpideak lantzen baditu, bederen). Finean, kode eraginkorragoa eta ikuspegi profesionalagoa emango diona egitea dugu helburu. Irakurleak nahi izanez gero \ref{sec:kodman} eranskinean du ikusgai manuala osorik.
-
-\subsubsection{Bertsio-kontrola}
-Behin kodea nola idatziko dugun definitu dugula, beharrezkoa da era eraginkorrean kode hori garatzeko bitartekoak izatea. Hainbat pertsonen artean kodea garatuko delarik (era eraginkorrean espero da, horretarako sortu baita kodifikazio manuala), beharrezkoa da bakoitzak izango duen bertsioa azkena izatea, integraziorako aldaketak ez egoteko eta garatzaile guztiek funtzionalitate aldetik bertsiorik osoena izateko. 
-
-Gainera, funtzionalitate oso interesgarriak eskaintzen dituzte.
-
-\begin{itemize}
- \item Kudeatu beharreko kodearen biltegiratzea.
- \item Kodeari aldaketak egitea ahalbidetzea.
- \item Eginiko aldaketa guztiak erregistratzea.
-\end{itemize}
-
-Beraz, ez da izango beharrezkoa garatzaile guztiek kode osoa izatea euren laneko makinetan, errepositoriotik deskargatu, bertan landu (aldaketa partzialak, fitxategiak gehitu, kendu...) besterik ez baitu egin beharko.  Gainera, ikusi ahal izango da nork egin duen zein aldaketa.
-
-Gure kasuan Git softwarea aukeratu dugu, web zerbitzu bati lotura egonik, beti eskuragarri dago (guk zerbitzari moduan erabiliko geunkeen ordenagailu jakin batean gorde behar izan gabe kodea, baliabideak aurreztuz). Gainera, funtzionalitate gehigarri gisa, bezeroa ere sartu ahalko litzateke web interfaze horretara bere lanaren nondik norakoak nola doazen ikusi ahal izateko (hala nahi izanez gero, noski). Ezingo luke edukirik igo web interfazetik, baina ikusi ahal izango luke berau. \ref{sec:gitinp} atalean azalduko da tresna hau nola erabiltzeari buruzko argibide praktikoak.
-
-\subsubsection{Berrikuspenak eta Frogak}
-Berrikuspen eta frogen helburua, kodea behin sorturik dagoela ahalik eta arazo gutxien dituela bermatzea da, bai \textit{bug}ak bilatuz zein funtzionalitateak betetzen dituela ikusiz. Berrikuspenen helburua garatzaile batek idatzitako kodea beste garatzaile edo kodea irakurtzeko gai den beste norbaitek, ea bug-ik sortu daitekeen edo egin beharreko funtzionalitateak betetzen dituen garatzaileak sortutako kodea. Gure kasuan, lan-talde txikia izanik, jende desberdinak egindako kodea guk ikus dezakegu, sistematikoki. Aurretik aipaturiko errepositorioan kodea izanda, erraztu egiten du kodea begiratzearen lana. 
- 
-Frogei dagokionez, bi eratako frogak daude, kutxa beltzekoak eta kutxa zurikoak. Kutxa beltzekoetan ez da kodea begiratzen eta aplikazioak ea espero den moduan jokatzen duen aztertzen da, hau da erabiltzaile normal batek, kode itxiko aplikaziobatean erreportatuko lukeena, gauza jakin bat ezin daitekeela egin aplikazioarekin. Kutxa beltzeko frogen helburua, erabiltzaileak egin ditzakeen pausuak errepikatzea da (funtzionalitateak eskura izanik), erroreak geronek ikusteko, erabiltzailearengana heldu baino lehen.
-
-Kutxa zuriko frogak, jada kodea ikusgai daukagularik egiten dira (hortik izena, gardentasuna-edo erakutsiz) eta kodean dauden balioen arabera egiten dira frogak (String bateko balioak zeintzuk diren ikusirik, balio hori baino handiagoak jarriaz, adibidez edo funtzio bati beste aldagai mota bat pasaz). 
-
-\noindent \textbf{Definituriko frogak}
-\noindent \textbf{Kutxa beltzeko frogak}
-
-\begin{itemize}
-\item Erabiltzaile izen edo pasahitz oker bat sartu
-\item Langile arrunt baten erabiltzaile izen eta pasahitz zuzenak sartu eta aktiboak ikusteko aukeratu
-\item Informatikari bat logeatu eta inzidentzia historikoak ikusi
-\item Informatikari bat logeatu eta inzidentziak ikusi
-\item Informatikari batek inzidentzia berri bat sortu ondoren inzidentziak ikusteko sakatu-
-\item Informatikari batek inzidentzia bat itxi eta inzidentziak ikusteko sakatu
-\item Informatikari batek inzidentzia bat itxi eta inzidentzia historikoak ikusteko sakatu
-\end{itemize}
-
-
-\noindent \textbf{Kutxa zuriko frogak}
-\begin{itemize}
-\item Inzidentzia bat sortu eta begiratu inzidentzia berriarentzat kode berri bat sortzen den automatikoki
-\item Inzidentzia bat sortu eta begiratu inzidentzia hori sortu den data benetan sortu den dataren berdina den.
-\item Inzidentzia bat sortu erabiltzaile batekin eta begiratu ea inzidentzia sortu duen erabiltzailearen kodea benetan inzidentzia sortu duenarena den.
-\item Inzidentzia mota berri bat sartu datu basean eta begiratu ea inzidentzia mota berri hori comboboxean agertzen den
-\item Aktibo berri bat sartu eta ondoren begiratu aktibo hori agertzen dela.
-\item Inzidentzia bat itxi eta begiratu konponduta parametroaren egoera aldatzen den.
-\item Inzidentzia bat itxi eta begiratu inzidentzia itxi duen langilearen kodea ongi gordetzen den.
-\item Inzidentzia bat itxi eta begiratu inzidentzia itxi den data ongi gordetzen den.
-\end{itemize}
-
-\subsection{Segurtasuna}
-Aipatu bezala, beraz, web aplikazioa sare lokaletik kanpo joango da, baina era berean kanpoko saretik babestuta joango den inguru batean. Inguru horri, DMZ (\textit{DeMilitarized Zone,  zona desmilitarizatua}) deritzo, bi \textit{fronte} ezberdinen arteko mugan baitago, aparteko ingurune batean. Era honetan, bertara sarbidea kontrolatuko duen firewall-aren bitartez, sare lokaletik eta kanpotik, VPN bat erabilita sartu ahal izango da.
+Figure no \ref{fig:deskarga} shows the development of the download (\texttt{Deskarga}) process. Each download is initialized with one \texttt{SeedChecker} and one \texttt{Gordetzaile} object and it is the \texttt{Deskarga} object who starts the \texttt{Gordetzaile} and \texttt{SeedChecker}, and when the \texttt{Gordetzaile} tells the \texttt{Deskarga} that it is awake, that is, the download is complete; interrupts the \texttt{SeedChecker}, waits to all the \texttt{Jasotzaileak} threads (each one downloads the content from a different client), interrupts the \texttt{Gordetzailea} and waits until all the remaining threads are finished.
 
 \begin{figure}
-\centering
-   \includegraphics[scale=0.5]{irudiak/sarea.png}
+   \centering
+   \includegraphics[scale=0.5]{irudiak/seedaktxekeatu.png}
    % Laster-markak gehitzeko menua
-   \caption{Sarearen eskema}
-   \label{fig:sarea}
-\end{figure}
+   \caption{Run of the \texttt{SeedChecker} thread.}
+   \label{fig:seedtxeker}
+\end{figure}  
 
-Firewall-ak, horretarako, konexioak baimendu behar ditu, bai sare lokal eta DMZ artean, baita kanpotik datorren VPN bitartezko trafikoa (kanpoko langileak eta batez ere zerbitzu teknikoko enpresa) ere. Beste konexio guztiak deseginez, DMZ horren segurtasuna bermatzen dugu, guk espreski baimentzen ez diogunari sarbidea ukatuz.
+The process of retrieving the seeds from the server is done by the \texttt{SeedChecker} thread (figure no. \ref{fig:seedtxeker}) and each . Starts retrieving the seeds from the server, with the data extracted from the file (see the \texttt{Datuak atera} process in figure no. \ref{fig:hasiera}). The server creates a Buffer list of the seeders and returns it to the client. The process described next is done using a mutual exclusion semaphore, to make sure that the objects mentioned are not manipulated at the same time. 
 
-Laburbilduz, hauek lirateke Firewall-eko oinarrizko arauak (portuak ez dira esplizituki adierazi, zerbitzu bakarra dagoelako, suposatuko da, zerbitzaria helburu duten paketeak 80. portura joango direla eta erantzunak $>1024$ portuetara).
-\bigskip
+The checker checks all that the seeders actually all the seeders exist or that are not in the \texttt{SeedLista} object, because that means that a file is being downloaded from them at the moment. As shown in the diagram no. \ref{fig:deskarga} the client creates a \texttt{Bidaltzailea} for each file, which is, in fact the seeder from the file is downloaded. Thus, having a seeder in the \texttt{SeedLista} means that the client is already downloading the same content from it and therefore is removed from the buffer. 
 
+Once the duplicated and inexistent seeders have been put away, for each seeder from the now clean buffer the system checks if the active seeder number (each active seeder has an active \texttt{Jasotzaile}) is less than the maximun one (\texttt{JasoMax}) and if it is, the \texttt{SeederChecker} registers the seeder in the \texttt{SeedLista} \texttt{SeedErabLista}. This last object is used to store the seeders that are actually in use, to prevent creating a new \texttt{Jasotzaile} with a seeder already in use. A \texttt{Jasotzaile} is created with a seeder that is in \texttt{SeedLista} but is not in \texttt{SeedErabLista}. After the creation of the Jasotzaile, the checker adds the newly created one to the \texttt{JasotzaileLista} list. But, if the active seeder number exceeds the maximun one, the new seeder is just registered in the \texttt{SeedLista} not in the \texttt{SeedErabLista}. Finally, the semaphore opens again and the process sleeps until is rerun again.
 
-\begin{tabular}{|c|c|c|c|c|c|}
-\hline
- Jatorrizko helbidea & Helburu helbidea & Protokoloa & Flag-ak & Ekintza \\ \hline
- 192.168.1.0/24 & 10.10.10.0/24 & http &  & Baimendu \\ \hline 
- 10.10.10/24 & 192.168.1.0/24 & http & STB & Baimendu \\ \hline
- 192.168.1.0/24 & ANY & http &  & Baimendu \\ \hline
- ANY & 192.168.1.0/24 & http & STB & Baimendu \\ \hline
- 220.100.65.98 & 10.10.10/24 & vpn & & Baimendu \\ \hline
- 10.10.10/24 & 220.100.65.98 & vpn & STB & Baimendu \\ \hline
- ANY & ANY & ANY & & Ez baimendu \\ \hline
-\end{tabular}
+\begin{figure}
+   \centering
+   \includegraphics[scale=0.45]{irudiak/jasotzailerun.png}
+   % Laster-markak gehitzeko menua
+   \caption{Run of the \texttt{Jasotzailea} thread.}
+   \label{fig:jasotzaile}
+\end{figure}  
 
-Era honetan, zerbitzu teknikoko enpresakoek (zeina 220.100.65.98 helbidea erabiliko luketen), gure enpresakoekin batera kontsultak egin ahal izango lukete sarearen bitartezko VPN trafiko zifratua erabiliz. VPN zerbitzaria, Firewall-eko 10.10.10/24 sareko gateway-ean egongo litzateke eta beste enpresakoak, bertako IP helbidea jakinda, euren VPN bezeroa erabiliz konektatu ahalko lirateke, baina, esan bezala, bakarrik euren enpresako helbidetik.
+The next process, concerning the retrieving of files, is done by the thread \texttt{Jasotzailea}, as shown in figure no. \ref{fig:jasotzaile}. It has already been mentioned how a \texttt{Jasotzaile} is created by the \texttt{SeedChecker}. Them the newly created object asks for the number of the next downloadable part. If that number is \texttt{-1}, the thread is interrupted. If it is not, asks to the \texttt{Bidaltzaile} of the seeder the next part of the file. If the part received has a size of 0 bytes, the thread files and error and starts the loop again. Unlike the previous break, this break does not interrupt the thread, just starts the loop again. If some bytes are received, the \texttt{Jasotzailea} just forwards those to the \texttt{Deskarga} object. All this it is done if there is no exceptional error which changes the \texttt{hil} value to \texttt{true}.
+
+\begin{figure}
+   \centering
+   \includegraphics[scale=0.6]{irudiak/gordetzaileruna.png}
+   % Laster-markak gehitzeko menua
+   \caption{Run of the \texttt{Gordetzailea} thread.}
+   \label{fig:gordetzailea}
+\end{figure}  
+
+The process of storing the file is controled by the \texttt{Gordetzailea} thread (shown in figure no. \ref{fig:gordetzailea}), which basically writes what has been received. All the process is regulated by a mutual exclusion semaphore, so no concurrence problems occur. The object is created with the data retrieved by the other client (see the \texttt{Datuak atera} process in figure no. \ref{fig:hasiera}). It basically writes received parts to the file (\texttt{Fitxategia}) and writes to a \begin{verbatim}.data\end{verbatim} (\texttt{datuFitxategia}) file what has been the last part downloaded, so the download can be resumed in the same place if the process is interrupted (in case the network goes down, for instance). After, if the downloaded part number is the same as the number of parts the file has, the semaphore opens, the auxiliary \begin{verbatim}.data\end{verbatim} file is erased and the \texttt{stopped} variable is set to true, so the process does not continue. If there are parts still to store, the process just repeats again.
+
+\begin{figure}
+   \centering
+   \includegraphics[scale=0.6]{irudiak/bidaltzailerun.png}
+   % Laster-markak gehitzeko menua
+   \caption{\texttt{Bidaltzailea} sending files method.}
+   \label{fig:bidaltzailea}
+\end{figure}  
+
+The last process shown in this report (figure no.\ref{fig:bidaltzailea}), is the one that affects the sending of files. Unlike the previous ones, this process is not started with an explicit \texttt{start()} method, Corba itself executes it in a separate thread, as the reincarnation of the methods stated in the IDL file. So, when a \texttt{Jasotzailea} asks for a new part, the \texttt{Bidaltzailea} reads the bytes concerned and sends them back. The reason to use RandomAccessFiles is that the file can be read simoultaneously and can be chosen which part is read, using the \texttt{seek()} function.
+
+With this six processes, the main functions of how our P2P program shares the files is explained, leaving secondary explanations aside.
+
+\subsection{Program structure}
+To achieve the functionalities presented in the previous section, it is necessary to go down to the code, to see how it is arranged and how different methods interact with each others. But, in this case, leaving the code apart, class diagrams are going to be shown, the last step of the unified procedure of this program. In those, methods and variables appear, ordered by the class they belong.
+
+\begin{figure}
+   \centering
+   \includegraphics[scale=0.5]{irudiak/BezeroKlaseDiagrama.png}
+   % Laster-markak gehitzeko menua
+   \caption{Class diagram of the client}
+   \label{fig:klasebezero}
+\end{figure}  
+
+\begin{figure}
+   \centering
+   \includegraphics[scale=0.5]{irudiak/ZerbitzariKlaseDiagrama.png}
+   % Laster-markak gehitzeko menua
+   \caption{Class diagram of the server}
+   \label{fig:klasezerbitzaria}
+\end{figure}  

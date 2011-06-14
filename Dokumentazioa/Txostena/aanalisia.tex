@@ -1,51 +1,68 @@
-\section{Arazoaren Analisia}
+\section{Methodology}
+\label{sec:met}
 
-\subsection{Inzidentzia-aplikazioa}
-\label{sec:ainf}
-Sistema honen muina osatzen duen web bidezko aplikazioan, inzidentziak jasoko dira, ITILeko (\textit{Information Technology Infrastructure Library, Informazio Teknologien Azpiegituraren Liburutegia}) Zerbitzua emateko liburuan aholkatzen diren praktikei jarraiki:
-
-\textbf{Erabiltzaileen logeoa}
-
-Gure sistemak bi erabiltzaile mota izango ditu: informatika departamentuko langileak eta gainontzeko langileak. Edonork web orrian zerbait egin nahi izango badu lehendabizi logeatu egin beharko da. Ondoren langile motaren arabera gauza batzuk egiteko aukera izango dute baina beste batzuk ezingo dituzte egin. Langile guztiek izango dute enpresako aktiboak ikusteko aukera eta inzidentziak zabaltzeko aukera. Bestalde, informatika departamentuko langileek soilik izango dute inzidentziak itxi, inzidentziak ikusi edo inzidentzien taula historikoa ikusteko aukera.
-
-\textbf{Aktiboak ikusi}
-
-Esan bezala enpresako langile guztiek izango dute enpresako aktibo ezberdinak ikusteko aukera. Aktibo hauek taldeka ikusiko dira motaren arabera sailkatuta. Beraz aktiboak ikusi nahi badira zein aktibo mota ikusi nahi den zehaztu beharko da eta hau egin ostean aktiboen taula azalduko da. Era honetan langileak zein aktibotan eragiten duen inzidentziak adierazi ahalko du eta informatikako departamentuko langileak aktibo hori zein beste aktiborekin dagoen erlazionatuta begiratu.
-
-\textbf{Inzidentziak sartu}
-
-Langile guztiek daukate inzidentziak berriak irekitzeko aukera. Inzidentzia bat sortzerakoan zein aktibori eragiten dion adierazi beharko da.Gainera, inzidentzia horren deskribapen bat sartzeko aukera egongo da eta inzidentzia hori zein motatako den ere adierazi beharko da. Horretaz gain, sistemak automatikoki inzidentzia zein langilek eta noiz ireki duen gordeko du.
-
-\textbf{Inzidentziak ikusi}
-
-Informatikako departamentuko langileek izango duten aukeren artean inzidentziak ikusteko aukera izango dute. Honela irekita baina oraindik konpondu gabe dauden inzidentzien informazioa begiratu ahalko da.
-
-\textbf{Inzidentziak itxi}
-
-Informatikako departamentuko langileek inzidentzia bat itxi nahi badute lehendabizi, hau aukeratu beharko dute eta ondoren zein soluzio aplikatu dioten deskribatzeko aukera izango dute horretaz gain, sistemak zein langilek itxi duen inzidentzia ere erregistratuko du eta inzidentzia hau inzidentzien taulatik ezabatu eta taula historikora pasako du.
-
-\textbf{Inzidentzia historikoak ikusi}
-
-Informatika departamentuko langileek iada konponduta dauden inzidentzien informazio ikusteko aukera ere izango dute, hau oso erabilgarri izan daiteke etorkizuneko akatsak zuzentzen lagun diezagukelako.
-
-
-Funtzionalitate guzti hauek definiturik, erabiltzaileek era egokian eman ahalko dituzte inzidentziak, eta IT departamentuko langileek arreta gune zentralizatua izango dute euren egitekoak ikusteko. Aplikazio hau, baina, ezin dute sare lokalean dauden langileek bakarrik erabili, kanpoan dauden langileek ere (bidaian dauden komertzialak e.a.) erabili beharko dute, daukaten arazoen berri emateko. Horrek eramaten gaitu hurrengo atalera.
-
-\subsection{Aplikazioaren segurtasuna}
-\label{sec:asec}
-Esan bezala, aplikazioa ez da egon behar eskuragarri bakarrik enpresako sare lokalean dauden langileentzat, kanpoan egon daitezkeen langileek eta batez ere, zerbitzu teknikoko langileek gure inzidentziak jakinarazteko zerbitzua erabili behar dute. Noski, ziurtatu behar dugu kanpokoen artean, langileek bakarrik erabil dezaketela zerbitzu hau eta gainera, hirugarren pertsona batek ezin izango duela langilearen eta gure zerbitzuaren arteko komunikazioa atzeman.
-
-Hori zirutatzeko bi tresna ezberdin erabiliko dira \textit{firewall} edo su-hesia eta VPN-a (\textit{Virtual Private Network, Sare pribatu birtuala}). Firewall-aren bitartez lortzen dena da trafikoa filtratu, izan ditzakeen jatorri eta helburuaren arabera. Era honetan, kanpotik gure inzidentzia zerbitzura egindako eskaera guztiak galarazi ditzakegu, VPN-a erabiltzen duten erabiltzaileak kenduta. VPN-a nahiz eta kanpoan egon, sare lokalean egongo litzatekeen modura jokatzea ahalbidetzen duen softwarea da, beste sare batzuetan barrena trafikoa eramanez. Gainera, trafiko hori zifratu egiten duenaren abantaila du, hirugarren pertsonengandik trafikoaren edukia ezkutatuz.
-
-\subsection{Metodologia}
-\label{sec:amet}
-Ez da nahikoa aurretik aipaturiko bi garapenak beste gabe egitea, lanerako metodologia propio eta egokia garatzea beharrezkoa da, proiektua bere osotasunean ahalik eta akats gutxien eta errekurtsu erabilera egokiena eginez garatu dela ahal den heinean ziurtatzeko. Baliabide hauek daude definitu ditugu, besteak beste:
-
+Being the already cited problem the creation of a P2P (Peer to Peer) application, it is vital to first identify the aspects that a P2P program normally fulfills, in order to work correctly. A P2P program, essentially, is an application that is used to share content through the network. Its most important difference from other downloading methods (FTP servers etc.) is that there is no central node in which content is downloaded from and uploaded to. The content flows through a decentralized network of nodes, clients, who simultaneously work as servers (or seeders, because they seed content) and downloaders (leechers). They are also servers in the P2P network, but they have a different role:
+ 
 \begin{description}
- \item [Bertsio-kontrolerako sistema] Hainbat pertsona aplikazio bera garatzen egon ahal izateko.
- \item [Kodifikazio manuala] Kodearen egitura uniformea eta ulerterrazagoa izateko.
- \item [Berrikuspen sistema] Kodean egon litezkeen akatsak ekiditeko.
- \item [Frogak] Kodeak funtzionalitateak ahalik eta akats gutxienekin betetzen duela ikusteko
+ \item [Servers] Servers are used to identify and contact different clients between them. They do not take part in the actual process of downloading or uploading content, that is the clients' job. If the server infrastructure falls down, it can be replaced with a new one; no data is lost.
+ \item [Clients] The core relies on the clients. Those are the responsible for downloading and uploading content, all the heavy traffic is done between clients, the server only helps meeting clients with similar interests. Normally, clients can stop and resume processes, and hold different processes at the same time (both uploads and downloads). More advanced features consists of bandwidth usage and a virtual crediting system to give priority to clients who share most. 
 \end{description}
 
-Baliabide hauetaz gain, baliabideen balorazioa ere txertatuko da dokumentuan, berauen eragina aztertuz eta egin ahalko liratekeen hobekuntza posibleak azalduz. Aparteko dokumentu bat ere garatuko da, aplikazioaren funtzionalitateak eta diseinua zehaztuko dituena, Analisia eta Diseinua izenekoa. \footnote{Dokumentu horren edukiera lan honetan dago bere osotasunean eta ez da eranskinen batean idatzi edukia ez errepikatzeko. Balizko dokumentu horren zati izango liratekeen atalak, hauek dira: \ref{sec:ainf}, \ref{sec:asec}, \ref{sec:dinf} eta \ref{sec:dsec}}. 
+Thus, if we leave the more advanced features aside, we have already defined what our program should do, with its two main parts: servers and clients. The server (a main one is enough to build a prototype) is the responsible to put clients together and clients are responsible for moving content. The client is the one an average user would use, so it is the one we will focus on. The server needs no user interaction.
+
+%Casos de uso diagrama
+\begin{figure}
+   \centering
+   \includegraphics[scale=0.5]{irudiak/usercase.png}
+   % Laster-markak gehitzeko menua
+   \caption{User Case diagram of the P2P client}
+   \label{fig:usercase}
+\end{figure}
+
+The diagram no. \ref{fig:usercase} shows the User Case diagram of the client, from the point of view of the user. When the user starts the program, receives from the server the list of the files available (the ones that other users have published) and chooses which one of the files wants to download. Without the user's consent, the files he or she is sharing are sent to other clients and if other clients want one of the files the user has, the upload of the content will also start automatically. Different uploading and downloading processes can be carried at the same time. 
+
+It has to be mentioned though, that the user can control the content he or she wants to upload, but not through this application. All the content the user wishes to share is stored in a directory called \texttt{ongoing}, so the user can use the Operating System to put or remove different files in the directory, but as said, it cannot be done using the program. Likewise, all the downloaded content is stored in a directory called \texttt{incoming} and once the file is downloaded, it is the user who places the file in the directory he or she wishes to.
+
+Before continuing with in-depth analysis and design of the application, it has to be cleared how many connections are there going to be. It has been noted before, that the main connections (the ones sharing content goes through) are between clients and that clients only turn to servers to know what files are being shared. Once the desired file has been selected and download starts from another client (or various, depending on the case) the server just keeps updating the downloadable file list, based on the clients that connect and disconnect. 
+
+\begin{figure}
+   \centering
+   \includegraphics[scale=0.5]{irudiak/Loturak.png}
+   % Laster-markak gehitzeko menua
+   \caption{Connections in the P2P system}
+   \label{fig:lotura}
+\end{figure}
+
+What has been told previously is summarized by the figure no. \ref{fig:lotura}. The diagram shows how the clients connect to the server to register files (and to receive the last version of the list showing the available files), and once they have selected what file to download, the server puts in contact the two clients (here the simplest case is shown, but more clients can be involved in the process), the seeder (the one who uploads) and the leecher (the one who downloads) start transferring content, but they still maintain contact with the server, to update the file list and to have the possibility to connect to other clients.
+
+Finally, it is important to note that although general diagrams of the working programs have been done \textit{before} the application was developed, technically deeper diagrams that come later have been outlined \textit{after} the application was developed, in order to be as accurate as possible. For the sake of cleanness, and to ease things as much as possible to the reader, diagrams that were outlined in order to guide the development of the program have not been included in this report, as those diagrams have gone through numerous changes from the original version until the final one.
+
+Thus, programming started early enough to make non-structural changes to the main design, but the main aspects of the program remained the same. The IDL file, for instance, was defined early in the analysis stage and luckily, there has been no need to change it all along the development phase:
+
+\begin{lstlisting}[language=IDL]
+module erabilgarriak{
+	struct FileData{
+		string name;
+		long long size;
+		string hash;
+	};
+	interface DownloadFile{
+		typedef sequence<octet, 1048576> Part;
+		FileData getFileData();
+		long getPartCount();
+		long getPart(in long numPart, inout Part part);
+	};
+	interface Server{
+		typedef sequence<FileData> FileDataArray;
+		typedef sequence<DownloadFile> DownloadFileArray;
+		boolean register(in DownloadFile file);
+		boolean deregister(in DownloadFile file);
+		boolean getLista(inout FileDataArray files);
+		boolean getFile(in FileData data, inout DownloadFileArray files);
+	};
+};
+\end{lstlisting}
+ 
+All the development has been done using VCS (Version Control System), to make development as easy as possible and to minimize possible version collisions. Parallel to the development, documentation has also been done step by step, using VCS as well, taking advantadge of the capabilities of \LaTeX{} to be used in one of those systems. In the next section, all the application is explained, using different diagrams and screenshots. Even those are used to explain the correct functioning of the program, they can be seen as the next step in the unified process of the creation of the Peer to Peer program.
+
+Until now, only the main lines of the program have been set. Once the main components and actions of the program are defined, it is necessary to jump to the next layer: what has been done, using the methods already mentioned, to achieve the program explained in the user case diagram (figure \ref{fig:usercase}). 

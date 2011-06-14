@@ -1,1 +1,7 @@
-\section{Ondorioak}
+\section{Conclusions and future improvements}
+%optimizazioa hari globalak seederrak txekatzeko, deskargak bertan registratu eta guztiei eramateko erantzunak. eta gordetzailearekin berdin
+%Deskargak gelditzea
+
+The main conclusion draw is that modelling the IDL file correctly at the beginning, analysing the functionalities and structure of the program beforehand, is crucial to have good rhythm of work. Changing the IDL and thus, the main structure of the program after starting the development, has very negative consequences in the course of development. We started later developing, because of multiple changes in the IDL and design of the program. But, in the long run, we gained many hours.
+
+As far as future improvements are concerned 

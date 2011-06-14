@@ -1,38 +1,9 @@
 \BOOKMARK [1][-]{section*.3}{Sarrera}{}
-\BOOKMARK [1][-]{section.1}{Arazoaren Analisia}{}
-\BOOKMARK [2][-]{subsection.1.1}{Inzidentzia-aplikazioa}{section.1}
-\BOOKMARK [2][-]{subsection.1.2}{Aplikazioaren segurtasuna}{section.1}
-\BOOKMARK [2][-]{subsection.1.3}{Metodologia}{section.1}
-\BOOKMARK [1][-]{section.2}{Diseinua}{}
-\BOOKMARK [2][-]{subsection.2.1}{Informazio sistemak}{section.2}
-\BOOKMARK [3][-]{subsubsection.2.1.1}{ITIL prozesuak}{subsection.2.1}
-\BOOKMARK [3][-]{subsubsection.2.1.2}{CMDB}{subsection.2.1}
-\BOOKMARK [3][-]{subsubsection.2.1.3}{Inzidentzien web aplikazioa}{subsection.2.1}
-\BOOKMARK [2][-]{subsection.2.2}{Metodologia}{section.2}
-\BOOKMARK [3][-]{subsubsection.2.2.1}{Kodifikazio manuala}{subsection.2.2}
-\BOOKMARK [3][-]{subsubsection.2.2.2}{Bertsio-kontrola}{subsection.2.2}
-\BOOKMARK [3][-]{subsubsection.2.2.3}{Berrikuspenak eta Frogak}{subsection.2.2}
-\BOOKMARK [2][-]{subsection.2.3}{Segurtasuna}{section.2}
-\BOOKMARK [1][-]{section.3}{Inplementazioa}{}
-\BOOKMARK [2][-]{subsection.3.1}{Informazio sistemak}{section.3}
-\BOOKMARK [2][-]{subsection.3.2}{Metodologia}{section.3}
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Bertsio kontrola}{subsection.3.2}
-\BOOKMARK [2][-]{subsection.3.3}{Segurtasuna}{section.3}
-\BOOKMARK [1][-]{section.4}{Ondorioak}{}
-\BOOKMARK [2][-]{subsection.4.1}{Informazio teknologiak}{section.4}
-\BOOKMARK [2][-]{subsection.4.2}{Metodologia}{section.4}
-\BOOKMARK [2][-]{subsection.4.3}{Segurtasuna}{section.4}
-\BOOKMARK [1][-]{section.5}{Hobekuntzak}{}
-\BOOKMARK [1][-]{section*.4}{Eranskinak}{}
-\BOOKMARK [1][-]{section.A}{Kodifikazio manuala}{}
-\BOOKMARK [2][-]{subsection.A.1}{Sarrera}{section.A}
-\BOOKMARK [2][-]{subsection.A.2}{Fitxategien estruktura}{section.A}
-\BOOKMARK [2][-]{subsection.A.3}{Koska\(tabulazioak\)}{section.A}
-\BOOKMARK [2][-]{subsection.A.4}{Komentarioak}{section.A}
-\BOOKMARK [2][-]{subsection.A.5}{Deklarazioak}{section.A}
-\BOOKMARK [2][-]{subsection.A.6}{Instrukzioak}{section.A}
-\BOOKMARK [2][-]{subsection.A.7}{Errore tratamendua}{section.A}
-\BOOKMARK [2][-]{subsection.A.8}{Izendapen konbetzioak}{section.A}
-\BOOKMARK [2][-]{subsection.A.9}{Praktika Onak}{section.A}
-\BOOKMARK [1][-]{section.B}{Fortigate Firewall-aren konfigurazioa}{}
-\BOOKMARK [1][-]{section.C}{Bibliografia}{}
+\BOOKMARK [1][-]{section.1}{Methodology}{}
+\BOOKMARK [1][-]{section.2}{The product}{}
+\BOOKMARK [2][-]{subsection.2.1}{Layout}{section.2}
+\BOOKMARK [2][-]{subsection.2.2}{Working process}{section.2}
+\BOOKMARK [2][-]{subsection.2.3}{Program structure}{section.2}
+\BOOKMARK [1][-]{section*.4}{Appendices}{}
+\BOOKMARK [1][-]{section.A}{Design patterns}{}
+\BOOKMARK [1][-]{section.B}{Bibliography}{}

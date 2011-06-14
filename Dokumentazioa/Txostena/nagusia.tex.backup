@@ -1,11 +1,33 @@
 
 \documentclass[a4paper,12pt]{article}
-\usepackage[basque]{babel}%eee
+\usepackage[english]{babel}%eee
 \usepackage{fullpage}%margina
 \usepackage{graphicx}%irudiak erabili 
 \usepackage{amsmath}%matrizeak erabili, taulak
 \usepackage{listings}%Kode zatiak txertatu
 
+\lstset{
+    %language=Java,
+    %Letrak... aldatzeko kodean adibidez {->}{{$\rightarrow$}}1, aukera ezberdinak espazio batekin banatzen dira
+    %literate=
+    tabsize=4,
+    numbers=left,
+    stepnumber=1,             % the step between two line-numbers. If it is 1 each line will be numbered
+    numbersep=5pt,            % how far the line-numbers are from the code
+    frame=single,
+    sensitive=true,
+    morecomment=[l][\color{darkgreen}\small\ttfamily]{//},
+    morecomment=[s][\color{blue}\small\ttfamily]{/*}{*/}, %Eztakitx ondo dauen
+    morestring=[b]",
+    stringstyle=\color{red},
+%    showstringspaces=false,
+    numberstyle=\small,
+    numberblanklines=true,
+%    showspaces=false,
+    breaklines=true,
+%    showtabs=false,
+    keywordstyle=\color{blue}\textbf
+}
 
 \usepackage[pdftex=true,colorlinks=true,linkcolor=blue,citecolor=black,urlcolor=blue]{hyperref}
 \pagestyle{plain}
@@ -19,9 +41,9 @@
 \begin{document}
 
 % Aurkibidea berrizendatu
-\renewcommand{\contentsname}{Aurkibidea}
+%\renewcommand{\contentsname}{Aurkibidea}
 % Bibliografia berrizendatu
-\renewcommand{\abstractname}{Laburpena}
+%\renewcommand{\abstractname}{Laburpena}
 % Irudiak zenbaki arabiarrez
 \renewcommand{\thefigure}{\arabic{figure}}
 
@@ -36,10 +58,8 @@
 
 \tableofcontents % Aurkibidea
 
-\newpage
-\vspace*{\fill}
+
 \listoffigures%Irudien zerrenda
-\vspace*{\fill}
 
 \include{sarrera} %sarrera
 
@@ -47,7 +67,7 @@
 
 \include{diseinua} %soluzioaren diseinua
 
-\include{inplementazioa} %soluzioaren inplementazioa
+%\include{inplementazioa} %soluzioaren inplementazioa
 
 %\include{ondorioak}%Ondorioak
 

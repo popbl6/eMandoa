@@ -1,162 +1,17 @@
 \section*{Eranskinak}
 \addcontentsline{toc}{section}{Eranskinak}
 
-\section{Kodifikazio manuala}
-\label{sec:kodman}
-
-\subsection{Sarrera}
-Kodea idazteko momentuan, kontuan izan behar dugu kodea ahal den ulergarriena egin behar dela. Kontura gaitezen, kodea irakurterreza bada lenguai horretan jakintza daukan edonor ulertu eta aldatu dezakela kodea edo programa hobetzeko asmoz. Lenguai bakoitzak arau ezberdinak izango ditu bere beharretara moldatuz. Gure kasuan, Java lenguaiko kodifikazio manual bat daukagu honek behar dituen atal ezberdinekin.  
-
-\subsection{Fitxategien estruktura}
-
-.java bakoitzak public class edo interface bat eduki behar du gutxienez.
-Fitxategi bakoitzeko elementu ezberdinak hurrengoko ordena izan beharko du:
- \begin{itemize}
-    \item Hasierako komentario bat 
-    \begin{itemize}
-	\item Modifikazio data,bertsioa, lizentzia, klase izena...
-    \end{itemize}
-    \item Definitu erabili beharreko paketeak
-    \item Erabiliko diren import-en deklarazioa
-    \item Klase komentarioa javadoc-a sortzeko komentarioa
-    \item Klasea
-    \begin{itemize}
-	\item Aldagaiak: Sarrera modifikatzailea erabilita ordenatuta, public, protected, modifikatzaile gabe eta private.
-	\item Konstruktoreak
-	\item Metodoak: Funtzionalitatearen arabera batuta.
-    \end{itemize}
- \end{itemize}
+\section{Design patterns}
 
 
+\section{Bibliography}
 
-\subsection{Koska(tabulazioak)}
-Proeiktua tabulatzeko orduan norma batzuk erabili behar dira kodea irakurterreza izan dadin.
-   \begin{itemize}
-	\item Tabulazio batek 4 espazio izan behar ditu
-	\item Lerro bakoitzak gehienez 80 karaktere.
-	\item Lerroak mozteko momentuan
-	\begin{itemize}
-	  \item Beti koma bat, operadore bat eta antzeko elementuen ostean egin daiteke
-	  \item Lerro berria aurreko lerroarekin alineatu behar da
-	  \item Nibel altuan moztu
-	\end{itemize}
-    \end{itemize}
-   
-
-
-\subsection{Komentarioak}
-  Komentarioak egiteko momentuan bi komentario mota ezberdin erabi ditzakegu:
-	\begin{itemize}
-	  \item Inplementazio komentarioak
-	    \begin{itemize}
-	      \item /*...*/ edo //
-	      \item Funtzio baten barruan badago ingurunearekin alineatu behar da ulergarria izan dadin.
-	      \item Komnetaio batek linea bat baino gehiago badu bloke komentarioa izan behar du.
-	      \item Kode erdian komentario bat jartzerako orduan, aurretik lerro huts bat eduki behar du.
-	    \end{itemize}
-	  \item Dokumentazio komentarioak
-	      \begin{itemize}
-	      \item /**...*/ erabiliz sortzen dira komentario hauek
-	      \item Javadoc-en estiloa jarraituz
-	    \end{itemize}
-	\end{itemize}
- 
-
-\subsection{Deklarazioak}
-
-
-	\begin{itemize}
-	  \item Aldagaiak
-	    \begin{itemize}
-	      \item Linea bakoitzeko aldagai deklarazio bakar bat egotea gomendagarria da.
-	      \item Ez jarri lerro batean mota desberdinako bi aldagai.
-	      \item Aldagai lokalak deklaratzen diren lekuan hasieratu.
-	      \item Deklarazioak bloke hasieretan egin behar dira{}, ezepzio batekin, bukleak.
-	      \item Nibel altuko aldagaiak ez berrizendatu.
-	    \end{itemize}
-	  \item Metodo eta klaseak
-	      \begin{itemize}
-	      \item Metodo baten izena eta bere parametroa listaren hasierako parentesiaren artean ez da espaziorik egongo
-	      \item Giltza zabaltzerakoan, deklarazioaren lerro berdinean egingo da.
-	      \item Giltza ixtean zabaltzen den lerroaren tabulazio berdina izango du.
-	      \item Giltza ixtea lerro berri batean egingo da, lerro bateko metodotan izan ezik.
-	      \item Metodoen artean lerro huts bat egongo da.
-	    \end{itemize}
-	\end{itemize}
-  
-   
-
-
-\subsection{Instrukzioak}
-    \begin{itemize}
-      \item Lerro bakoitzak instrukzio bakarra izango du.
-      \item Bloke berri bat zabaltzean, aurreko instrukzioa baino tabulazio bat gehiago izango du.
-      \item Giltzak beti sartzen dira, lerro bateko if-else-tan ere bai.
-      \item Return batek, ez du parentesirik edukiko beharrezkoak ez badira.
-      \item Ezin dira hiru for, while... baino gehiago egongo bata bestearen barruan.
-      \item Ezin dira bost if baino gehiago egon bata bestearen barruan.
-      \item Metodo batek ez du pantaila bat baino gehiago okupatuko
-    \end{itemize}
-  
-
-\subsection{Errore tratamendua}
-    \begin{itemize}
-      \item Ahal den heinean errorea berriro bota mezu esanguratsu batekin.
-      \item Ezepzio berriak sortzea ekidin behar da.
-      \item Errore tratamendua ahal den nibelik altuenean egin(main-a)
-    \end{itemize}
-  
-  
-  
-
-\subsection{Izendapen konbetzioak}
-	\begin{itemize}
-	  \item Paketeak
-	    \begin{itemize}
-	      \item Nibel altuko domeinu bat punto batez, empresako izenarekin banatu behar da adb: domeinu.empresa.       
-	    \end{itemize}
-	  \item  Klaseak eta interfazeak
-	    \begin{itemize}
-	      \item Maiuskulaz hasten dira eta hitz bat baino gehiagoz osatuta badago hitz guztien lehen letra maiuskulaz egongo da.
-	      \item Izen simple eta esanguratsua izan behar dute.
-	      \item Beti hitza osorik idatzi behar da, ez laburbildu oso ezaguna ez bada.
-	    \end{itemize}
-	  \item Metodoak
-	    \begin{itemize}
-	      \item Metoroaren izena minuskulaz hasi beharko da eta hitz bat baino gehiagoz osatuta badago, beste hitzen izenak maiuskulaz hasi beharko dira.
-	    \end{itemize}
-	  \item Aldagaiak
-	    \begin{itemize}
-	      \item Izen motzak eta esanguratsuak izan behar dute minuskulaz hasi beharko da eta hitz bat baino gehiagoz osatuta badago, beste hitzen izenak maiuskulaz hasi beharko dira.
-	      \item Letra bateko aldagaiak ekidin, aldagai tenporalak ez badira.	      
-	    \end{itemize}
-	  \item Konstanteak
-	    \begin{itemize}
-	      \item Izen esanguratsua eta dena maiuskulaz, hitzak \_ batekin banatuz.        
-	    \end{itemize}
-	\end{itemize}
-  
-
-\subsection{Praktika Onak}
-
-  \begin{itemize}
-      \item Klase edo aldagai bat ez deklaratu public moduan arrazoi on bat izan gabe.
-      \item Ez erabili objetu bat funtzio estatikoak erabiltzeko.
-      \item Ez erabili zenbakiak kodean zehar, konstanteak erabili.
-      \item Adierazpen konplikatuetan parentesiak erabili.
-   \end{itemize}
-
-\section{Fortigate Firewall-aren konfigurazioa}
-\label{sec:forkonf}
-Jarraian dago idatzirik, Fortigate firewall eta VPN-aren konfigurazio osoa.
-
-\lstinputlisting{fgt_system.conf}
-
-\section{Bibliografia}
-
-\noindent FORTINET. \textit{FortiGate SOHO and SMB Version 3.0 MR6} [linean]. Fortinet, 2011. \newline \htmladdnormallink{http://docs.fortinet.com/fgt/archives/3.0/techdocs/FortiGate_Example_SOHO_01-30006-0062-20080310.pdf}{http://docs.fortinet.com/fgt/archives/3.0/techdocs/FortiGate_Example_SOHO_01-30006-0062-20080310.pdf} [Azken kontsulta: 2011-5-19]
+\noindent FORTINET. \textit{FortiGate SOHO and SMB Version 3.0 MR6} [linean]. Fortinet, 2011. \newline \htmladdnormallink{http://docs.fortinet.com/fgt/archives/3.0/techdocs/FortiGate\_Example\_SOHO\_01-30006-0062-20080310.pdf}{http://docs.fortinet.com/fgt/archives/3.0/techdocs/FortiGate_Example_SOHO_01-30006-0062-20080310.pdf} [Azken kontsulta: 2011-5-19]
 \bigskip
 
 \noindent GITHUB. \textit{GitHub:Help} [linean]. GitHub, 2011. \newline \htmladdnormallink{http://help.github.com/}{http://help.github.com/} [Azken kontsulta: 2011-5-19]
+\bigskip
+
+\noindent ITIL. \textit{The Official Introduction to the ITIL Service Lifestyle}. Londres: TSO, 2007. \newline \htmladdnormallink{http://help.github.com/}{http://help.github.com/} [Azken kontsulta: 2011-5-19]
 \bigskip
 

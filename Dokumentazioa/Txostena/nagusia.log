@@ -1,4 +1,4 @@
-This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2010.9.18)  19 MAY 2011 19:54
+This is pdfeTeX, Version 3.141592-1.21a-2.2 (Web2C 7.5.4) (format=pdflatex 2010.9.18)  14 JUN 2011 19:36
 entering extended mode
 **nagusia.tex
 (./nagusia.tex
@@ -28,17 +28,19 @@ File: size12.clo 2004/02/16 v1.4f Standard LaTeX file (size option)
 (/usr/local/share/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2004/11/20 v3.8d The Babel package
 
-(/usr/local/share/texmf-dist/tex/generic/babel/basque.ldf
-Language: basque 2004/02/19 v1.0f Basque support from the babel system
+(/usr/local/share/texmf-dist/tex/generic/babel/english.ldf
+Language: english 2004/06/14 v3.3o English support from the babel system
 
 (/usr/local/share/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2004/11/20 v3.8d Babel common definitions
 \babel@savecnt=\count87
 \U@D=\dimen103
 )
-Package babel Info: Making " an active character on input line 85.
-Warning: You are using encoding OT1 instead of T1.
-Some word breaks will not be found.
+\l@british = a dialect from \language\l@english 
+\l@UKenglish = a dialect from \language\l@english 
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
 ))
 (/usr/local/share/texmf-dist/tex/latex/preprint/fullpage.sty
 Package: fullpage 1999/02/23 1.1 (PWD)
@@ -225,25 +227,25 @@ Package caption Info: listings package v1.2 (or newer) detected on input line 6
 04.
 ) (./nagusia.aux
 (./azala.aux) (./abstract.aux) (./sarrera.aux) (./aanalisia.aux)
-(./diseinua.aux) (./inplementazioa.aux) (./ondorioak.aux) (./hobekuntzak.aux)
-(./eranskinak.aux))
+(./diseinua.aux) (./eranskinak.aux))
 \openout1 = `nagusia.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
- (/usr/local/share/texmf-dist/tex/context/base/supp-pdf.tex
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+
+(/usr/local/share/texmf-dist/tex/context/base/supp-pdf.tex
 (/usr/local/share/texmf-dist/tex/context/base/supp-mis.tex
 loading : Context Support Macros / Miscellaneous (2004.10.26)
 \protectiondepth=\count116
@@ -285,14 +287,14 @@ File: color.cfg 2005/02/03 v1.3 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 125.
 )
-Package hyperref Info: Link coloring ON on input line 41.
+Package hyperref Info: Link coloring ON on input line 42.
 
 (/usr/local/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2003/12/03 v2.21 Cross-referencing by name of section
 \c@section@level=\count126
 )
-LaTeX Info: Redefining \ref on input line 41.
-LaTeX Info: Redefining \pageref on input line 41.
+LaTeX Info: Redefining \ref on input line 42.
+LaTeX Info: Redefining \pageref on input line 42.
  (./nagusia.out)
 (./nagusia.out)
 \openout3 = `nagusia.out'.
@@ -322,7 +324,7 @@ LaTeX Info: Redefining \selectfont on input line 125.
 \openout2 = `azala.aux'.
 
  (./azala.tex
-<irudiak/mgeplogo2.png, id=159, 418.56375pt x 173.64874pt>
+<irudiak/mgeplogo2.png, id=43, 418.56375pt x 173.64874pt>
 File: irudiak/mgeplogo2.png Graphic file (type png)
 
 <use irudiak/mgeplogo2.png>) [1
@@ -339,213 +341,131 @@ logo2.png>]
 \tf@toc=\write5
 \openout5 = `nagusia.toc'.
 
-[3
-
-] (./nagusia.lof)
+(./nagusia.lof)
 \tf@lof=\write6
 \openout6 = `nagusia.lof'.
 
- [4]
+ [3
+
+]
 \openout2 = `sarrera.aux'.
 
- (./sarrera.tex) [5
+ (./sarrera.tex) [4
 
 ]
 \openout2 = `aanalisia.aux'.
 
- (./aanalisia.tex [6
+ (./aanalisia.tex
+<irudiak/usercase.png, id=107, 573.64313pt x 324.46219pt>
+File: irudiak/usercase.png Graphic file (type png)
+
+<use irudiak/usercase.png> [5
 
 
-]) [7]
-\openout2 = `diseinua.aux'.
+ <./irudiak/usercase.png>]
+<irudiak/Loturak.png, id=116, 755.82375pt x 321.2pt>
+File: irudiak/Loturak.png Graphic file (type png)
+ <use irudiak/Loturak.png>
+[6 <./irudiak/Loturak.png>]
+(/usr/local/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+(/usr/local/share/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2004/09/05 1.3 listings language file
+)
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 43.
 
-
-(./diseinua.tex
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 11.
- (/usr/local/share/texmf-dist/tex/latex/base/omscmr.fd
+(/usr/local/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 11.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 43.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 50.
 
-<irudiak/cau.png, id=265, 699.61375pt x 447.6725pt>
-File: irudiak/cau.png Graphic file (type png)
- <use irudiak/cau.png>
-[8
-
-
-]
-Overfull \hbox (3.956pt too wide) in paragraph at lines 49--50
-[]\OT1/cmr/m/n/12 Sistema (zer-bi-tza-riak, era-bil-tzai-leen eki-poak...)
- []
-
-[9 <./irudiak/cau.png>]
-<irudiak/gestionInzidentzia.png, id=281, 593.21625pt x 440.64626pt>
-File: irudiak/gestionInzidentzia.png Graphic file (type png)
-
-<use irudiak/gestionInzidentzia.png>
-<irudiak/cmdb.png, id=282, 1012.78375pt x 560.0925pt>
-File: irudiak/cmdb.png Graphic file (type png)
- <use irudiak/cmdb.png>
-[10 <./irudiak/gestionInzidentzia.png>]
-Overfull \hbox (6.43521pt too wide) in paragraph at lines 81--82
-\OT1/cmr/m/n/12 ko. Behin sis-te-man lo-gea-tu-ta, in-zi-den-tziak sor-tze-ko a
-u-ke-ra, edo en-pre-sa-ko CI(configuration
- []
-
-[11 <./irudiak/cmdb.png>]
-Overfull \hbox (33.9951pt too wide) in paragraph at lines 111--112
-[]\OT1/cmr/m/n/12 Kutxa zu-ri-ko fro-gak, ja-da ko-dea ikus-gai dau-ka-gu-la-ri
-k egi-ten di-ra (hor-tik ize-na, gardentasuna-
- []
-
-[12]
-Overfull \hbox (0.24684pt too wide) in paragraph at lines 121--122
-[]\OT1/cmr/m/n/12 Informatikari ba-tek in-zi-den-tzia be-rri bat sor-tu on-do-r
-en in-zi-den-tziak ikus-te-ko sakatu-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 121--122
-
- []
-
-<irudiak/sarea.png, id=301, 433.62pt x 464.73625pt>
-File: irudiak/sarea.png Graphic file (type png)
- <use irudiak/sarea.png>
-[13]) [14 <./irudiak/sarea.png>] [15]
-\openout2 = `inplementazioa.aux'.
-
- (./inplementazioa.tex
-Overfull \hbox (47.20735pt too wide) in paragraph at lines 46--46
-[]\OT1/cmtt/m/n/12 mkdir POPBL6                                            (pro
-iektuaren direktorioa[] 
- []
-
-
-Overfull \hbox (10.15733pt too wide) in paragraph at lines 46--46
-[]\OT1/cmtt/m/n/12 cd POPBL6                                               (dir
-ektoriora joan)[] 
- []
-
-
-Overfull \hbox (3.98233pt too wide) in paragraph at lines 46--46
-[]\OT1/cmtt/m/n/12 git init                                                (git
- errepositorio[] 
- []
-
-
-Overfull \hbox (16.33234pt too wide) in paragraph at lines 46--46
-[]\OT1/cmtt/m/n/12 git add README                                          (fit
-xategia indizera[] 
- []
-
-
-Overfull \hbox (47.20735pt too wide) in paragraph at lines 46--46
-[]                                                        \OT1/cmtt/m/n/12 lehe
-n commita mezuarekin)[] 
- []
-
-[16
-
-
-]
-Overfull \hbox (22.50734pt too wide) in paragraph at lines 46--46
-[]                                                        \OT1/cmtt/m/n/12 erre
-positorioa gehitu[] 
- []
-
-
-Overfull \hbox (3.98233pt too wide) in paragraph at lines 46--46
-[]                                                        \OT1/cmtt/m/n/12 orig
-in izenarekin)[] 
- []
-
-
-Overfull \hbox (10.15733pt too wide) in paragraph at lines 46--46
-[]\OT1/cmtt/m/n/12 git push -u origin master                               (gur
-e errepositorio[] 
- []
-
-
-Overfull \hbox (22.50734pt too wide) in paragraph at lines 46--46
-[]                                                        \OT1/cmtt/m/n/12 loka
-leko adar nagusia[] 
- []
-
-[17] [18] [19]) [20]
-\openout2 = `ondorioak.aux'.
-
- (./ondorioak.tex) [21
-
-
-]
-\openout2 = `hobekuntzak.aux'.
-
- (./hobekuntzak.tex
-Overfull \hbox (3.63293pt too wide) in paragraph at lines 2--3
-\OT1/cmr/m/n/12 Hobekuntza po-si-bleen ar-tean na-bar-men-du dai-tez-ke egi-ni-
-ko apli-ka-zioa-ren alo-rrean, CMDB-
- []
-
-) [22
-
-
-]
-\openout2 = `eranskinak.aux'.
-
- (./eranskinak.tex [23
-
-
-] [24] [25] (./fgt_system.conf [26] [27] [28]
-Overfull \hbox (187.43103pt too wide) in paragraph at lines 157--158
-[][] 
- []
-
-[29] [30]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 224.
-
- (/usr/local/share/texmf-dist/tex/latex/base/omlcmr.fd
+(/usr/local/share/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 224.
- [31] [32]
-[33] [34] [35] [36] [37] [38] [39] [40] [41] [42] [43] [44] [45] [46] [47]
-[48] [49] [50] [51] [52]
-Overfull \hbox (293.18085pt too wide) in paragraph at lines 989--990
-[][] 
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 50.
+) [7]
+\openout2 = `diseinua.aux'.
+
+ (./diseinua.tex
+<irudiak/bezeroahasiera.png, id=162, 548.0475pt x 465.74pt>
+File: irudiak/bezeroahasiera.png Graphic file (type png)
+
+<use irudiak/bezeroahasiera.png>
+<irudiak/deskargenruna.png, id=163, 436.63126pt x 397.485pt>
+File: irudiak/deskargenruna.png Graphic file (type png)
+
+<use irudiak/deskargenruna.png> [8
+
+
+ <./irudiak/bezeroahasiera.png>]
+<irudiak/seedaktxekeatu.png, id=171, 821.0675pt x 869.2475pt>
+File: irudiak/seedaktxekeatu.png Graphic file (type png)
+
+<use irudiak/seedaktxekeatu.png> [9 <./irudiak/deskargenruna.png>] [10 <./irudi
+ak/seedaktxekeatu.png>]
+<irudiak/jasotzailerun.png, id=186, 388.45125pt x 399.4925pt>
+File: irudiak/jasotzailerun.png Graphic file (type png)
+
+<use irudiak/jasotzailerun.png>
+Overfull \hbox (0.22258pt too wide) in paragraph at lines 51--52
+[]\OT1/cmr/m/n/12 The next pro-cess, con-cern-ing the re-triev-ing of files, is
+ done by the thread \OT1/cmtt/m/n/12 Jasotzailea\OT1/cmr/m/n/12 ,
  []
 
-[53] [54] [55] [56] [57] [58] [59])
-Overfull \hbox (5.17986pt too wide) in paragraph at lines 157--159
-[][]\OT1/cmr/m/n/12 http://docs.fortinet.com/fgt/archives/3.0/techdocs/FortiGat
-e[]Example[]SOHO[]01-30006-
+<irudiak/gordetzaileruna.png, id=187, 483.8075pt x 422.57875pt>
+File: irudiak/gordetzaileruna.png Graphic file (type png)
+
+<use irudiak/gordetzaileruna.png>
+<irudiak/bidaltzailerun.png, id=188, 434.62375pt x 281.05pt>
+File: irudiak/bidaltzailerun.png Graphic file (type png)
+
+<use irudiak/bidaltzailerun.png> [11 <./irudiak/jasotzailerun.png>] [12 <./irud
+iak/gordetzaileruna.png> <./irudiak/bidaltzailerun.png>]
+<irudiak/BezeroKlaseDiagrama.png, id=201, 988.69376pt x 685.56125pt>
+File: irudiak/BezeroKlaseDiagrama.png Graphic file (type png)
+
+<use irudiak/BezeroKlaseDiagrama.png>
+Overfull \hbox (41.37778pt too wide) in paragraph at lines 80--82
+ [][] 
  []
 
-) [60] (./nagusia.aux (./azala.aux) (./abstract.aux) (./sarrera.aux)
-(./aanalisia.aux) (./diseinua.aux) (./inplementazioa.aux) (./ondorioak.aux)
-(./hobekuntzak.aux) (./eranskinak.aux)) ) 
+<irudiak/ZerbitzariKlaseDiagrama.png, id=202, 803.0pt x 509.905pt>
+File: irudiak/ZerbitzariKlaseDiagrama.png Graphic file (type png)
+
+<use irudiak/ZerbitzariKlaseDiagrama.png>) [13 <./irudiak/BezeroKlaseDiagrama.p
+ng>] [14 <./irudiak/ZerbitzariKlaseDiagrama.png>]
+\openout2 = `eranskinak.aux'.
+
+ (./eranskinak.tex [15
+
+
+])
+[16] (./nagusia.aux (./azala.aux) (./abstract.aux) (./sarrera.aux)
+(./aanalisia.aux) (./diseinua.aux) (./eranskinak.aux)) ) 
 Here is how much of TeX's memory you used:
- 6691 strings out of 94500
- 95882 string characters out of 1174973
- 368480 words of memory out of 1000000
- 8311 multiletter control sequences out of 10000+100000
- 12634 words of font info for 45 fonts, out of 500000 for 2000
+ 5432 strings out of 94500
+ 76162 string characters out of 1174973
+ 171374 words of memory out of 1000000
+ 8415 multiletter control sequences out of 10000+100000
+ 12576 words of font info for 45 fonts, out of 500000 for 2000
  580 hyphenation exceptions out of 1000
- 31i,8n,42p,2199b,1510s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 29i,7n,49p,1123b,1241s stack positions out of 1500i,500n,5000p,200000b,5000s
 PDF statistics:
- 1820 PDF objects out of 300000
- 1413 named destinations out of 131072
- 346 words of extra memory for PDF output out of 65536
-</usr/local/share/texmf-dist/fonts/typ
-e1/bluesky/cm/cmtt12.pfb></usr/local/share/texmf-dist/fonts/type1/bluesky/cm/cm
-mi12.pfb></usr/local/share/texmf-dist/fonts/type1/bluesky/cm/cmsl10.pfb></usr/l
-ocal/share/texmf-dist/fonts/type1/bluesky/cm/cmsy10.pfb></usr/local/share/texmf
--dist/fonts/type1/bluesky/cm/cmr7.pfb></usr/local/share/texmf-dist/fonts/type1/
-bluesky/cm/cmr8.pfb></usr/local/share/texmf-dist/fonts/type1/bluesky/cm/cmti12.
-pfb></usr/local/share/texmf-dist/fonts/type1/bluesky/cm/cmr10.pfb></usr/local/s
-hare/texmf-dist/fonts/type1/bluesky/cm/cmbx10.pfb></usr/local/share/texmf-dist/
-fonts/type1/bluesky/cm/cmr12.pfb></usr/local/share/texmf-dist/fonts/type1/blues
-ky/cm/cmbx12.pfb>
-Output written on nagusia.pdf (60 pages, 639787 bytes).
+ 222 PDF objects out of 300000
+ 61 named destinations out of 131072
+ 144 words of extra memory for PDF output out of 65536
+</usr/local/share/texmf
+-dist/fonts/type1/bluesky/cm/cmsltt10.pfb></usr/local/share/texmf-dist/fonts/ty
+pe1/bluesky/cm/cmr8.pfb></usr/local/share/texmf-dist/fonts/type1/bluesky/cm/cmm
+i12.pfb></usr/local/share/texmf-dist/fonts/type1/bluesky/cm/cmsy10.pfb></usr/lo
+cal/share/texmf-dist/fonts/type1/bluesky/cm/cmti12.pfb></usr/local/share/texmf-
+dist/fonts/type1/bluesky/cm/cmsl10.pfb></usr/local/share/texmf-dist/fonts/type1
+/bluesky/cm/cmtt12.pfb></usr/local/share/texmf-dist/fonts/type1/bluesky/cm/cmr1
+0.pfb></usr/local/share/texmf-dist/fonts/type1/bluesky/cm/cmbx10.pfb></usr/loca
+l/share/texmf-dist/fonts/type1/bluesky/cm/cmr12.pfb></usr/local/share/texmf-dis
+t/fonts/type1/bluesky/cm/cmbx12.pfb>
+Output written on nagusia.pdf (16 pages, 844157 bytes).
