@@ -34,7 +34,7 @@ public class Bezero {
 		for(int i=0;i<lista.length;i++){
 			if(lista[i].isFile()){
 				FileData fd = new FileData();
-				label.setText(lista[i].getName()+"...");
+				label.setText("Irakurtzen: "+lista[i].getName()+"...");
 				fd.name=lista[i].getName();
 				fd.size=lista[i].length();
 				try {
@@ -126,7 +126,7 @@ public class Bezero {
 			System.out.println("Fitxategia irakurtzen:"+lista[i]);
 		    BufferedReader br = new BufferedReader(new FileReader(lista[i]));
 		    String name=br.readLine();
-		    label.setText(name+"...");
+		    label.setText("Berrabiarazten:"+name+"...");
 		    Long size=Long.parseLong(br.readLine());
 		    String hash=br.readLine();
 		    FileData fd=new FileData();

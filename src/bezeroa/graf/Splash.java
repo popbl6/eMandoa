@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -24,7 +25,7 @@ public class Splash extends JWindow{
         pb.setStringPainted(true);
         label = new JLabel("Hasieratzen...");
         JPanel panel = new JPanel(new GridLayout(2, 1));
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        ((JComponent) getContentPane()).setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.add(pb);
         panel.add(label);
         getContentPane().add(l, BorderLayout.CENTER);
