@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -18,12 +19,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.table.TableRowSorter;
@@ -61,6 +66,7 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 		this.setResizable(true);
 		this.setLocation(100, 100);
 		splash.getProgressBar().setValue(5);
+		this.setJMenuBar(menuBarraSortu());
 		this.setContentPane(panelOrokorraSortu());
 		Thread a = new Thread(){
 			public void run(){
@@ -74,10 +80,7 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 						
 						sleep(20);
 					}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					//e.printStackTrace();
-				}
+				} catch (Exception e) {}
 			}
 		};
 		a.start();
@@ -126,34 +129,7 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				for(DownloadFile df : bidaltzaileak){
-					Thread a = new Thread(){
-						boolean stopped=false;
-						public void interrupt(){
-							this.stopped = true;
-							super.interrupt();
-						}
-						public void run(){
-							while(!stopped){
-								try{
-									sleep(1000*2);
-									System.exit(0);
-								}catch(Exception e){}
-							}
-						}
-					};
-					a.start();
-					Globalak.eMandoa.getServer().deregister(df);
-					a.interrupt();
-					try {
-						a.join();
-					} catch (InterruptedException e) {}
-				}
-				Globalak.ORBGlobal.getORB().shutdown(true);
-				try {
-					Globalak.ORBGlobal.getORBThread().join();
-				} catch (InterruptedException e) {}
-				System.exit(0);
+				irten();
 			}
 
 			@Override
@@ -186,6 +162,84 @@ public class SistemaGrafikoa extends JFrame implements ActionListener{
 		this.setVisible(true);
 		splash.setVisible(false);
 		splash.dispose();
+	}
+
+	private JMenuBar menuBarraSortu() {
+		JMenuBar bar = new JMenuBar();
+		JMenu menu = new JMenu("Aukerak");
+		menu.setMnemonic(KeyEvent.VK_A);
+		menu.getAccessibleContext().setAccessibleDescription("Programako aukerak");
+		JMenuItem fitxBerriak = new JMenuItem("Fitxategiak erregistratu");
+		fitxBerriak.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.ALT_MASK));
+		fitxBerriak.getAccessibleContext().setAccessibleDescription("ongoing karpetan dauden fitxategiak erregistratu");
+		fitxBerriak.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<FileData> fitx = Bezero.getFitxBerriak();
+				if(fitx != null){
+					for (int i=0; fitx.size()>i; i++){
+					    try{
+					    	FileData filedata=fitx.get(i);
+					    	Bidaltzailea bidal = new Bidaltzailea(filedata);
+					    	DownloadFile df = DownloadFileHelper.narrow(Globalak.ORBGlobal.getRootPOA().servant_to_reference(bidal));
+					    	bidaltzaileak.add(df);
+					        Globalak.eMandoa.getServer().register(df);
+					    }catch (Exception e1){
+					      JOptionPane.showMessageDialog(null, "Errore bat zerbitzarira konektatzerako orduan", "Errorea", JOptionPane.INFORMATION_MESSAGE);
+					    }
+					}
+				}
+			}
+		});
+		JMenuItem irten = new JMenuItem("irten");
+		irten.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.ALT_MASK));
+		irten.getAccessibleContext().setAccessibleDescription("Programatik irten");
+		irten.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {irten();}
+		});
+		
+		menu.add(fitxBerriak);
+		menu.addSeparator();
+		menu.add(irten);
+		bar.add(menu);
+		
+		return bar;
+	}
+
+	protected void irten() {
+		for(DownloadFile df : bidaltzaileak){
+			Thread a = getTimer();
+			a.start();
+			Globalak.eMandoa.getServer().deregister(df);
+			a.interrupt();
+			try {
+				a.join();
+			} catch (InterruptedException e) {}
+		}
+		Globalak.ORBGlobal.getORB().shutdown(true);
+		try {
+			Globalak.ORBGlobal.getORBThread().join();
+		} catch (InterruptedException e) {}
+		System.exit(0);
+	}
+
+	protected Thread getTimer() {
+		return new Thread(){
+			boolean stopped=false;
+			public void interrupt(){
+				this.stopped = true;
+				super.interrupt();
+			}
+			public void run(){
+				while(!stopped){
+					try{
+						sleep(1000*2);
+						System.exit(0);
+					}catch(Exception e){}
+				}
+			}
+		};
 	}
 
 	private Container panelOrokorraSortu() {

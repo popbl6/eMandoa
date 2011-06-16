@@ -150,6 +150,44 @@ public class Bezero {
 		}
 		
 	}
+
+	public static ArrayList<FileData> getFitxBerriak() {
+		File fichero=new File(ONCOMING_PATH);
+		ArrayList<FileData> fitx = new ArrayList<FileData>();
+		if(!fichero.exists())
+			fichero.mkdir();
+		File [] lista;
+		lista=fichero.listFiles();
+		if(lista == null)
+			return null;
+		for(int i=0;i<lista.length;i++){
+			if(lista[i].isFile()){
+				boolean found = false;
+				for(FileData fd : files){
+					if(fd.name.equals(lista[i].getName())){
+						found = true;
+						break;
+					}
+				}
+				if(!found){
+					FileData fd = new FileData();
+					fd.name=lista[i].getName();
+					fd.size=lista[i].length();
+					try {
+						System.out.println(lista[i].getAbsoluteFile());
+						fd.hash=DigestUtils.md5Hex(new FileInputStream(lista[i].getAbsoluteFile()));
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					fitx.add(fd);
+					files.add(fd);
+				}
+			}
+		}
+		return fitx;
+	}
 	
 	
 }

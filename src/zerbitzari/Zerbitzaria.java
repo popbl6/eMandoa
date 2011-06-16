@@ -20,7 +20,7 @@ public class Zerbitzaria {
 		Garbitzailea garb = zerb.new Garbitzailea();
 		garb.start();
 		Scanner in = new Scanner(System.in);
-		System.out.println("Zerbitzaria martxan dagon itzali nahi duzu?(b/e)");
+		System.out.println("Sakatu enter zerbitzaria amatatzeko");
 		in.nextLine();
 		Globalak.ORBGlobal.getORB().shutdown(true);
 		garb.interrupt();
